@@ -1,12 +1,38 @@
 # BookZy
 
-**BookZy** is a premium, lightweight appointment booking SaaS specifically designed for Indian small service businesses (Salons, Clinics, Tutors, Coaching Centres, and Freelancers). 
+## 📖 What is BookZy?
 
-It replaces cluttered WhatsApp scheduling with a professional, centralized dashboard and custom public booking links (e.g., `bookzy.in/priya-salon`).
+**BookZy** is a premium, lightweight appointment booking SaaS designed specifically to solve the scheduling chaos faced by Indian small service businesses—such as **Salons, Clinics, Tutors, Coaching Centres, and Freelancers**.
+
+Many small businesses in India currently manage appointments by answering phone calls, scribbling in notebooks, or scrolling through endless WhatsApp messages. This leads to double-bookings, lost appointments, and frustrated customers. 
+
+**BookZy changes this.** It provides business owners with a professional, centralized dashboard to manage their time, and it gives them a beautiful, custom public booking link (e.g., `bookzy.in/priya-salon`). Customers can simply click the link, pick an open time slot, and instantly confirm their appointment—all without needing to download an app or create an account. 
 
 ---
 
-## 🚀 Features
+## ⚙️ How It Works (The Complete Flow)
+
+BookZy is split into two seamless experiences: The **Owner Dashboard** and the **Customer Booking Page**.
+
+### 1. The Business Owner Setup Flow
+1. **Passwordless Sign-Up:** The business owner visits the BookZy homepage and logs in using just their professional email address. A secure Magic Link or OTP is sent to their inbox via Supabase Auth (no passwords to remember).
+2. **Onboarding Wizard:** Upon their first login, the owner is guided through a clean, step-by-step onboarding process:
+   - *Step 1:* They enter their business name, category, and city. A custom URL slug (like `/dr-kumar-clinic`) is automatically generated.
+   - *Step 2:* They add the **Services** they offer, specifying how long each service takes (e.g., "Root Canal - 45 minutes") and the price.
+   - *Step 3:* They define their **Working Hours** for each day of the week (e.g., Monday-Friday, 9:00 AM to 5:00 PM).
+3. **The Dashboard:** Once onboarded, the owner lands on their private Dashboard. Here they can view their schedule for the day, see upcoming appointments, manually block off time for lunch or vacations, and update their services.
+4. **Sharing the Link:** The owner clicks the "Share Link" button to copy their custom URL or download a QR code, which they then paste into their WhatsApp status, Instagram bio, or directly to clients.
+
+### 2. The Customer Booking Flow
+1. **Opening the Link:** A customer clicks the business's link on Instagram or WhatsApp and lands on their clean, mobile-optimized public booking page.
+2. **Choosing a Service:** The customer sees a list of available services and clicks the one they want.
+3. **Dynamic Slot Generation:** The customer picks a date on the calendar. BookZy's backend instantly calculates available time slots by taking the business's open hours and *subtracting* any existing bookings or manually blocked slots on that day.
+4. **Entering Details & Confirming:** The customer selects a green time slot, enters their name, WhatsApp number, and email, and clicks "Book".
+5. **Instant Notifications:** As soon as the booking is made, the business owner sees it appear on their live dashboard. Simultaneously, **Nodemailer** sends a beautifully formatted confirmation email to both the customer and the owner with the appointment details and a cancellation link.
+
+---
+
+## 🚀 Key Features
 
 ### For Business Owners
 - **Passwordless Authentication:** Secure login using email magic links and OTPs via Supabase Auth.
@@ -18,7 +44,8 @@ It replaces cluttered WhatsApp scheduling with a professional, centralized dashb
 
 ### For Customers
 - **No Login Required:** Frictionless booking experience.
-- **Real-Time Availability:** The booking engine calculates open slots dynamically based on the business's working hours, active bookings, and blocked slots to prevent double-booking.
+- **Real-Time Availability:** The booking engine calculates open slots dynamically to prevent double-booking.
+- **Self-Serve Cancellations:** Customers receive an email with a secure token link allowing them to cancel their own appointment if needed.
 - **Instant Email Confirmations:** Both the business owner and the customer receive immediate email receipts.
 
 ---
