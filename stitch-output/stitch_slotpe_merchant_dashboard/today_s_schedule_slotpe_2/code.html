@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slotpe - Today's Schedule</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "primary": "#004ac6",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed": "#0b1c30",
+                      "on-primary-fixed": "#00174b",
+                      "on-primary-container": "#eeefff",
+                      "tertiary-fixed-dim": "#c3c7cb",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#d0dbed",
+                      "surface-container": "#e6eeff",
+                      "background": "#f8f9ff",
+                      "outline": "#737686",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "secondary-fixed": "#d3e4fe",
+                      "surface-variant": "#d9e3f6",
+                      "inverse-surface": "#27313f",
+                      "on-tertiary-fixed": "#171c1f",
+                      "surface-tint": "#0053db",
+                      "outline-variant": "#c3c6d7",
+                      "tertiary-container": "#696e71",
+                      "on-surface": "#121c2a",
+                      "on-surface-variant": "#434655",
+                      "surface-container-high": "#dee9fc",
+                      "on-tertiary-container": "#edf1f5",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "surface": "#f8f9ff",
+                      "surface-container-low": "#eff4ff",
+                      "secondary-container": "#d0e1fb",
+                      "on-tertiary-fixed-variant": "#43474b",
+                      "on-background": "#121c2a",
+                      "inverse-primary": "#b4c5ff",
+                      "primary-container": "#2563eb",
+                      "surface-bright": "#f8f9ff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-container-highest": "#d9e3f6",
+                      "on-secondary-container": "#54647a",
+                      "secondary": "#505f76",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed": "#dfe3e7",
+                      "error": "#ba1a1a",
+                      "tertiary": "#515659"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "2xl": "48px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "3xl": "64px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "gutter": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Geist"],
+                      "headline-md": ["Geist"],
+                      "headline-xl": ["Geist"],
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Geist"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- Mobile TopNavBar (from JSON) -->
+<header class="md:hidden sticky top-0 z-50 flex justify-between items-center w-full px-md py-md bg-surface/80 backdrop-blur-md border-b border-outline-variant">
+<div class="font-headline-md text-headline-md font-bold text-primary">Slotpe</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold ml-2">
+                P
+            </div>
+</div>
+</header>
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex flex-col h-screen w-64 p-md gap-sm bg-surface-container-low border-r border-outline-variant sticky top-0 z-40 shrink-0 transition-transform duration-200 ease-in-out">
+<div class="mb-lg px-2">
+<div class="font-headline-md text-headline-md text-primary font-black">Slotpe Dashboard</div>
+<div class="text-body-sm text-on-surface-variant mt-1">Premium Management</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<!-- Active Tab: Today -->
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-container text-on-primary-container font-semibold rounded-lg font-label-md text-label-md transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined fill" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+                Today
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg font-label-md text-label-md transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">event_note</span>
+                Bookings
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg font-label-md text-label-md transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">layers</span>
+                Services
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg font-label-md text-label-md transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg font-label-md text-label-md transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">share</span>
+                Share Link
+            </a>
+</div>
+<div class="mt-auto pt-lg border-t border-outline-variant/50 flex flex-col gap-2">
+<button class="w-full mb-4 bg-primary text-on-primary py-2 px-4 rounded-lg font-label-md text-label-md font-semibold hover:bg-primary/90 transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Block Slot
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg font-label-md text-label-md transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg font-label-md text-label-md transition-transform duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0 pb-2xl md:pb-0">
+<!-- Page Header -->
+<div class="px-md md:px-lg py-lg md:py-xl flex flex-col sm:flex-row sm:items-end justify-between gap-md border-b border-outline-variant bg-surface">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-1">Today's Schedule</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">storefront</span> Priya Salon
+                    <span class="text-outline mx-1">•</span>
+<span id="currentDate">October 24, 2023</span>
+</p>
+</div>
+<div class="flex items-center gap-sm md:gap-md w-full sm:w-auto">
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-surface text-on-surface-variant border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span> Share Link
+                </button>
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md font-semibold hover:bg-primary/90 transition-colors shadow-sm md:hidden">
+<span class="material-symbols-outlined text-[18px]">add</span> Block Slot
+                </button>
+</div>
+</div>
+<!-- Dashboard Content Container -->
+<div class="p-md md:p-lg flex flex-col gap-lg max-w-[1400px] w-full mx-auto">
+<!-- Stats Row (Bento Style) -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-md">
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex flex-col relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Total Bookings</span>
+<div class="font-headline-xl text-headline-xl text-on-surface">12</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex flex-col relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-[#10B981]/5 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Completed</span>
+<div class="font-headline-xl text-headline-xl text-on-surface">4</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex flex-col relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-[#F59E0B]/5 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Upcoming</span>
+<div class="font-headline-xl text-headline-xl text-on-surface">7</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex flex-col relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-error/5 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">No-Shows</span>
+<div class="font-headline-xl text-headline-xl text-error">1</div>
+</div>
+</div>
+<!-- Schedule List Section -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden flex flex-col">
+<div class="px-md py-sm border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Chronological View</h2>
+<div class="flex gap-2">
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-variant rounded-md transition-colors" title="Filter">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Desktop Table View -->
+<div class="hidden md:block overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-bright">
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase w-24">Time</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase">Customer</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase">Service</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase w-32">Status</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y divide-outline-variant/50">
+<!-- Row 1: Completed -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 px-4 whitespace-nowrap font-medium text-on-surface-variant">09:00 AM</td>
+<td class="py-3 px-4">
+<div class="font-medium text-on-surface">Rohan Patel</div>
+<div class="text-on-surface-variant text-[13px] flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">call</span> +91 98765 43210
+                                    </div>
+</td>
+<td class="py-3 px-4">Men's Haircut</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[12px] font-medium bg-[#DEF7EC] text-[#03543F] border border-[#DEF7EC]">
+                                        Completed
+                                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:bg-primary/10 p-1.5 rounded-md" title="Message">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Confirmed (Active) -->
+<tr class="hover:bg-surface-container-low transition-colors bg-primary/5 group border-l-4 border-l-primary">
+<td class="py-3 px-4 whitespace-nowrap font-medium text-primary">10:30 AM</td>
+<td class="py-3 px-4">
+<div class="font-medium text-on-surface">Ananya Sharma</div>
+<div class="text-on-surface-variant text-[13px] flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">call</span> +91 91234 56789
+                                    </div>
+</td>
+<td class="py-3 px-4">Bridal Makeup Trial</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[12px] font-medium bg-primary-container/20 text-primary border border-primary/20">
+                                        Confirmed
+                                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="text-on-surface-variant hover:text-[#03543F] hover:bg-[#DEF7EC] p-1.5 rounded-md transition-colors" title="Mark Complete">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+<button class="text-on-surface-variant hover:text-error hover:bg-error-container p-1.5 rounded-md transition-colors" title="Mark No-show">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+<button class="text-primary hover:bg-primary/10 p-1.5 rounded-md transition-colors" title="WhatsApp">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Upcoming -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-3 px-4 whitespace-nowrap font-medium text-on-surface-variant">01:00 PM</td>
+<td class="py-3 px-4">
+<div class="font-medium text-on-surface">Vikram Singh</div>
+<div class="text-on-surface-variant text-[13px] flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">call</span> +91 99887 76655
+                                    </div>
+</td>
+<td class="py-3 px-4">Hair Spa</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[12px] font-medium bg-surface-variant text-on-surface-variant border border-outline-variant/50">
+                                        Upcoming
+                                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-[#03543F] hover:bg-[#DEF7EC] p-1.5 rounded-md transition-colors" title="Mark Complete">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+<button class="text-primary hover:bg-primary/10 p-1.5 rounded-md transition-colors" title="Message">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: No-show -->
+<tr class="hover:bg-surface-container-low transition-colors group bg-error/5 opacity-75">
+<td class="py-3 px-4 whitespace-nowrap font-medium text-error">02:30 PM</td>
+<td class="py-3 px-4">
+<div class="font-medium text-on-surface line-through">Neha Gupta</div>
+<div class="text-on-surface-variant text-[13px] flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">call</span> +91 98712 34567
+                                    </div>
+</td>
+<td class="py-3 px-4">Manicure &amp; Pedicure</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[12px] font-medium bg-error-container text-on-error-container border border-error-container">
+                                        No-Show
+                                    </span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-primary hover:bg-primary/10 p-1.5 rounded-md transition-colors" title="Message">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Mobile List View -->
+<div class="md:hidden flex flex-col divide-y divide-outline-variant/50">
+<!-- Mobile Row 1 -->
+<div class="p-md bg-surface">
+<div class="flex justify-between items-start mb-2">
+<div class="font-label-md text-label-md font-bold text-on-surface-variant">09:00 AM</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[12px] font-medium bg-[#DEF7EC] text-[#03543F] border border-[#DEF7EC]">
+                                Completed
+                            </span>
+</div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Rohan Patel</div>
+<div class="text-body-sm text-body-sm text-on-surface-variant mb-3">Men's Haircut</div>
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1.5 text-primary border border-primary/20 rounded-md font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">chat</span> Chat
+                            </button>
+</div>
+</div>
+<!-- Mobile Row 2 (Active) -->
+<div class="p-md bg-primary/5 border-l-4 border-l-primary">
+<div class="flex justify-between items-start mb-2">
+<div class="font-label-md text-label-md font-bold text-primary">10:30 AM</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[12px] font-medium bg-primary-container/20 text-primary border border-primary/20">
+                                Confirmed
+                            </span>
+</div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Ananya Sharma</div>
+<div class="text-body-sm text-body-sm text-on-surface-variant mb-3">Bridal Makeup Trial</div>
+<div class="flex justify-between gap-2 border-t border-outline-variant/30 pt-3 mt-1">
+<button class="flex-1 px-2 py-1.5 text-[#03543F] bg-[#DEF7EC] rounded-md font-label-sm text-label-sm flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span> Complete
+                            </button>
+<button class="flex-1 px-2 py-1.5 text-error bg-error-container rounded-md font-label-sm text-label-sm flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">close</span> No-Show
+                            </button>
+<button class="px-3 py-1.5 text-primary bg-primary/10 rounded-md font-label-sm text-label-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to set current date
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', dateOptions);
+    </script>
+</body></html>

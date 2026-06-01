@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bookings - Slotpe Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "primary": "#004ac6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-primary-fixed": "#00174b",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed-dim": "#c3c7cb",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d0dbed",
+                        "surface-container": "#e6eeff",
+                        "background": "#f8f9ff",
+                        "outline": "#737686",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-variant": "#d9e3f6",
+                        "inverse-surface": "#27313f",
+                        "on-tertiary-fixed": "#171c1f",
+                        "surface-tint": "#0053db",
+                        "outline-variant": "#c3c6d7",
+                        "tertiary-container": "#696e71",
+                        "on-surface": "#121c2a",
+                        "on-surface-variant": "#434655",
+                        "surface-container-high": "#dee9fc",
+                        "on-tertiary-container": "#edf1f5",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-container": "#d0e1fb",
+                        "on-tertiary-fixed-variant": "#43474b",
+                        "on-background": "#121c2a",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-secondary-container": "#54647a",
+                        "secondary": "#505f76",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#dfe3e7",
+                        "error": "#ba1a1a",
+                        "tertiary": "#515659",
+                        "status-confirmed-bg": "#dbe1ff",
+                        "status-confirmed-text": "#00174b",
+                        "status-completed-bg": "#dcfce7",
+                        "status-completed-text": "#14532d",
+                        "status-noshow-bg": "#ffdad6",
+                        "status-noshow-text": "#93000a",
+                        "status-cancelled-bg": "#f3f4f6",
+                        "status-cancelled-text": "#374151"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "3xl": "64px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "headline-xl": ["Geist"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col md:flex-row overflow-hidden">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden sticky top-0 z-50 flex justify-between items-center w-full px-lg py-md bg-surface/80 backdrop-blur-md border-b border-outline-variant">
+<div class="flex items-center gap-sm">
+<span class="font-headline-md text-headline-md-mobile font-bold text-primary">Slotpe</span>
+</div>
+<div class="flex items-center gap-md">
+<button aria-label="Notifications" class="text-on-surface-variant hover:bg-surface-container rounded-full p-sm transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="Settings" class="text-on-surface-variant hover:bg-surface-container rounded-full p-sm transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="Owner Profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A close-up headshot of a professional business owner with a friendly expression. They are wearing smart-casual clothing suitable for a modern office environment. The background is slightly blurred with soft, natural lighting indicating a bright, clean space. The overall tone is approachable and professional, aligning with a premium service brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU2i3sBCNuThFeLmXIwE85RXWqqyKyUQy27-EOeYeUEX_jnN46xImQuaDUCiarW1RwhqB_iRDxUXJJ3xK5xIxQ9oj-vx1O5ArFd-5YO0vcKjV1PrgRtfthFQxWFtY-2ew7wpdT-oXNBdjKA-oP_-7tOtNG05MUKFBDtpnJLLUxcHtfJZaHjkW9_sUEHhSUurMS-4hsd4v-LGjDBSovdTmAxuCVwLE5YdzV7oHYKwHwE5M5XpOf4jFt7vXCSCOUemq-WnZbA5m3_0zu"/>
+</div>
+</header>
+<!-- SideNavBar (Web Only) -->
+<nav class="hidden md:flex flex-col h-screen w-64 p-md gap-sm bg-surface-container-low border-r border-outline-variant shrink-0">
+<div class="flex items-center gap-sm px-md py-lg mb-md">
+<img alt="Business Logo" class="w-10 h-10 rounded-lg shadow-sm" data-alt="A modern, abstract geometric logo design for a professional business. The logo features clean lines and a bold blue color palette, set against a pristine white background. The style is minimalist and corporate, conveying trust and efficiency. The lighting is flat and even, highlighting the sharp edges of the design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBdN-Dnw5pPP_BnP-BzuPRMArHfPg_6kGJLHC4qUCOSy9WLrPeCePWIvUqilgwsma_auDal4hfoLXegTqzbBWwY3FBa55vS_tQAywKF9iCzx-gbpJYVWUFFDPjnn91JccoJ6GbL9WFENgYnUKkAqGNKa2O2ctih4PECA5oTKs0gFmM5dmp85hkC3x3BkNYbse4rl0dtB7zgL2aypgQkcAJaTFPz-Vd4gVaCuChG8iB_Bo7Qo7mcb-FHZIuayI3tjvpYYa420Jjjmrr"/>
+<div>
+<div class="font-headline-md text-headline-md text-primary font-black tracking-tight">Slotpe Dashboard</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Premium Management</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Today</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container font-semibold rounded-lg transition-transform duration-200" href="#">
+<span class="material-symbols-outlined fill">event_note</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-label-md text-label-md">Services</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">share</span>
+<span class="font-label-md text-label-md">Share Link</span>
+</a>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant flex flex-col gap-xs">
+<button class="w-full flex items-center justify-center py-sm px-md bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
+                Block Slot
+            </button>
+<a class="flex items-center gap-md px-md py-sm mt-sm text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-background p-md md:p-xl flex flex-col gap-lg">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-background">Bookings</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs">Manage all your appointments and schedule.</p>
+</div>
+<div class="flex gap-sm">
+<button class="hidden md:flex items-center gap-xs py-sm px-md bg-surface-container-lowest border border-outline-variant text-on-surface-variant font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">download</span>
+                    Export
+                </button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-xs py-sm px-md bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-on-primary-fixed-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined">add</span>
+                    New Booking
+                </button>
+</div>
+</div>
+<!-- Filters & Search Bar -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm flex flex-col lg:flex-row gap-md items-start lg:items-center justify-between">
+<div class="flex flex-wrap gap-sm w-full lg:w-auto">
+<!-- Date Filter -->
+<div class="relative group">
+<button class="flex items-center gap-xs py-xs px-md border border-outline-variant rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                        Date: Upcoming
+                        <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<!-- Dropdown would go here in actual implementation -->
+</div>
+<!-- Status Filter -->
+<div class="relative group">
+<button class="flex items-center gap-xs py-xs px-md border border-outline-variant rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/20">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        Status: All
+                        <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Search -->
+<div class="relative w-full lg:w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-background focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/60" placeholder="Search customer or service..." type="text"/>
+</div>
+</div>
+<!-- Bookings Table (Desktop) / Cards (Mobile) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<!-- Desktop Table View -->
+<div class="hidden md:block overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface/50">
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase">Date &amp; Time</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase">Customer</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase">Service</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase">Status</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant/50 hover:bg-background transition-colors group">
+<td class="py-md px-md">
+<div class="font-medium text-on-background">Oct 24, 2023</div>
+<div class="text-on-surface-variant text-sm mt-0.5">10:00 AM - 11:00 AM</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-primary flex items-center justify-center font-bold text-sm">RS</div>
+<div>
+<div class="font-medium text-on-background">Rahul Sharma</div>
+<div class="text-on-surface-variant text-sm mt-0.5">+91 98765 43210</div>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="text-on-background">Premium Consultation</div>
+<div class="text-on-surface-variant text-sm mt-0.5">₹1,500</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-confirmed-bg text-status-confirmed-text font-label-sm text-[11px] uppercase tracking-wide">
+                                    Confirmed
+                                </span>
+</td>
+<td class="py-md px-md text-right">
+<button class="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant/50 hover:bg-background transition-colors group">
+<td class="py-md px-md">
+<div class="font-medium text-on-background">Oct 24, 2023</div>
+<div class="text-on-surface-variant text-sm mt-0.5">02:30 PM - 03:15 PM</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<img alt="Customer Profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A close-up portrait of a female customer smiling gently at the camera. She has natural makeup and is wearing a light-colored blouse. The background is a soft, out-of-focus park setting with green hues. The lighting is natural and flattering, creating a warm and approachable aesthetic suitable for a professional profile avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4__9hz8WTRwErI5zGKw2R0HwJs9hQucUyHnE6wG_vUW95rpQa2GyUhaS8dY0UeWF2HvZfSRaTcf_5e7lP4jpEY6uVOPqr_bJ-S6PqXrS7eT5VLIDcaqw98ZlM6zy8ugLObMZaxJfWnULs3qLN_VUvl6RDmHyEWrxuXIdOo33oG3X8LeTWPZ9-aBQT3s_ia2Zl8TZJSzBPXfC5fkl8a0QkkLABH2ioWXwgKAgqqFmpnJ4v2GYA5oKbL769qqros11nW3F6CzhZ33w1"/>
+<div>
+<div class="font-medium text-on-background">Priya Patel</div>
+<div class="text-on-surface-variant text-sm mt-0.5">+91 91234 56789</div>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="text-on-background">Follow-up Session</div>
+<div class="text-on-surface-variant text-sm mt-0.5">₹800</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-completed-bg text-status-completed-text font-label-sm text-[11px] uppercase tracking-wide">
+                                    Completed
+                                </span>
+</td>
+<td class="py-md px-md text-right">
+<button class="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-outline-variant/50 hover:bg-background transition-colors group opacity-80">
+<td class="py-md px-md">
+<div class="font-medium text-on-background">Oct 25, 2023</div>
+<div class="text-on-surface-variant text-sm mt-0.5">09:00 AM - 10:00 AM</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-sm">AK</div>
+<div>
+<div class="font-medium text-on-background text-on-surface-variant line-through">Amit Kumar</div>
+<div class="text-on-surface-variant text-sm mt-0.5">+91 99887 76655</div>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="text-on-background">Standard Review</div>
+<div class="text-on-surface-variant text-sm mt-0.5">₹1,000</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-cancelled-bg text-status-cancelled-text font-label-sm text-[11px] uppercase tracking-wide">
+                                    Cancelled
+                                </span>
+</td>
+<td class="py-md px-md text-right">
+<button class="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-background transition-colors group">
+<td class="py-md px-md">
+<div class="font-medium text-on-background">Oct 25, 2023</div>
+<div class="text-on-surface-variant text-sm mt-0.5">11:30 AM - 12:15 PM</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-sm">ND</div>
+<div>
+<div class="font-medium text-on-background">Neha Desai</div>
+<div class="text-on-surface-variant text-sm mt-0.5">+91 94567 89012</div>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="text-on-background">Initial Assessment</div>
+<div class="text-on-surface-variant text-sm mt-0.5">₹1,200</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-noshow-bg text-status-noshow-text font-label-sm text-[11px] uppercase tracking-wide">
+                                    No-show
+                                </span>
+</td>
+<td class="py-md px-md text-right">
+<button class="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Mobile Card View -->
+<div class="md:hidden flex flex-col">
+<!-- Card 1 -->
+<div class="p-md border-b border-outline-variant/50 hover:bg-background transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-confirmed-bg text-status-confirmed-text font-label-sm text-[11px] uppercase tracking-wide mb-xs">
+                                Confirmed
+                            </span>
+<div class="font-medium text-on-background text-body-md">Oct 24, 2023</div>
+<div class="text-on-surface-variant text-sm">10:00 AM - 11:00 AM</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container transition-colors -mr-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="bg-background rounded-lg p-sm border border-outline-variant/30 flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-primary flex items-center justify-center font-bold text-sm shrink-0">RS</div>
+<div class="flex-1 min-w-0">
+<div class="font-medium text-on-background truncate">Rahul Sharma</div>
+<div class="text-on-surface-variant text-xs truncate">Premium Consultation • ₹1,500</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-md border-b border-outline-variant/50 hover:bg-background transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-status-completed-bg text-status-completed-text font-label-sm text-[11px] uppercase tracking-wide mb-xs">
+                                Completed
+                            </span>
+<div class="font-medium text-on-background text-body-md">Oct 24, 2023</div>
+<div class="text-on-surface-variant text-sm">02:30 PM - 03:15 PM</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary p-xs rounded-full hover:bg-surface-container transition-colors -mr-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="bg-background rounded-lg p-sm border border-outline-variant/30 flex items-center gap-sm">
+<img alt="Customer Profile" class="w-10 h-10 rounded-full border border-outline-variant shrink-0" data-alt="A close-up portrait of a female customer smiling gently at the camera. She has natural makeup and is wearing a light-colored blouse. The background is a soft, out-of-focus park setting with green hues. The lighting is natural and flattering, creating a warm and approachable aesthetic suitable for a professional profile avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc4Urt9s2KgPu3-g3UbmsbEte1n4JMMxlSoT8Jex0yBp790-HDeAnYxBASC3kCx4LA-NagEJU6dKXcweiW8gq2IW_vbz7i7oeUQYCJC1lGvvMCsRY52sG0g1ImL90oqCSaHVBy9QxmEaP9unezuJjURh0jHUrTCvHBF40cIl5qRxbkJIJB0rEFpMl9_GGIE5Hge8wlG1ucO9mfd-EZ1w8IKuDlp-gE8G9vH252de8CeaozAa5g6N_GjZznNnr2Mzg0wosHMx51fRsb"/>
+<div class="flex-1 min-w-0">
+<div class="font-medium text-on-background truncate">Priya Patel</div>
+<div class="text-on-surface-variant text-xs truncate">Follow-up Session • ₹800</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="bg-surface-container-lowest p-md border-t border-outline-variant flex items-center justify-between">
+<div class="text-body-sm text-on-surface-variant hidden sm:block">
+                    Showing 1 to 4 of 24 bookings
+                </div>
+<div class="flex items-center gap-sm w-full sm:w-auto justify-between sm:justify-end">
+<button class="px-md py-xs border border-outline-variant rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+                        Previous
+                    </button>
+<button class="px-md py-xs border border-outline-variant rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                        Next
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface/80 backdrop-blur-md border-t border-outline-variant flex justify-around items-center py-sm pb-safe z-50">
+<a class="flex flex-col items-center gap-xs p-xs text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-sm text-[10px]">Today</span>
+</a>
+<a class="flex flex-col items-center gap-xs p-xs text-primary font-bold transition-colors" href="#">
+<div class="bg-primary-container px-lg py-xs rounded-full">
+<span class="material-symbols-outlined fill text-on-primary-container">event_note</span>
+</div>
+<span class="font-label-sm text-[10px]">Bookings</span>
+</a>
+<a class="flex flex-col items-center gap-xs p-xs text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-label-sm text-[10px]">Services</span>
+</a>
+<a class="flex flex-col items-center gap-xs p-xs text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-[10px]">Settings</span>
+</a>
+</nav>
+</body></html>

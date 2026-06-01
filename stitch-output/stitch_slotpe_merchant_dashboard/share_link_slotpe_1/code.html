@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slotpe - Share Booking Link</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#54647a",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-fixed": "#d3e4fe",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-tint": "#0053db",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c3c6d7",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#515659",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-surface": "#121c2a",
+                        "on-surface-variant": "#434655",
+                        "surface-container-high": "#dee9fc",
+                        "tertiary-fixed": "#dfe3e7",
+                        "on-tertiary-fixed-variant": "#43474b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-dim": "#d0dbed",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#27313f",
+                        "outline": "#737686",
+                        "on-tertiary-fixed": "#171c1f",
+                        "surface-container": "#e6eeff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#2563eb",
+                        "tertiary-fixed-dim": "#c3c7cb",
+                        "primary": "#004ac6",
+                        "surface": "#f8f9ff",
+                        "secondary": "#505f76",
+                        "tertiary-container": "#696e71",
+                        "on-primary-container": "#eeefff",
+                        "on-background": "#121c2a",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d9e3f6",
+                        "inverse-primary": "#b4c5ff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-tertiary-container": "#edf1f5",
+                        "secondary-container": "#d0e1fb",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "3xl": "64px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "2xl": "48px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface dark:bg-surface-dim h-full w-64 border-r border-outline-variant fixed left-0 top-0 flex-col py-lg z-20">
+<div class="px-lg mb-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">
+                S
+            </div>
+<div>
+<h1 class="text-headline-lg font-headline-lg font-bold text-primary dark:text-inverse-primary tracking-tight">Slotpe</h1>
+<p class="text-label-sm font-label-sm text-secondary">Premium SaaS</p>
+</div>
+</div>
+<ul class="flex flex-col gap-2 px-md flex-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-label-md">Today</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="text-label-md font-label-md">Bookings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="text-label-md font-label-md">Services</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-primary dark:border-inverse-primary bg-primary-container/10 scale-[0.98] transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+<span class="text-label-md font-label-md">Share Link</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen relative">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-container-low border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-lg py-md h-16 sticky top-0 z-10">
+<div class="md:hidden flex items-center gap-3">
+<h1 class="text-headline-md font-headline-md font-extrabold text-on-surface dark:text-inverse-on-surface tracking-tight">Slotpe</h1>
+</div>
+<div class="hidden md:block">
+<h2 class="text-headline-md font-headline-md text-on-surface">Share Booking Link</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-opacity opacity-80 rounded-full p-2 hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-opacity opacity-80 rounded-full p-2 hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Business Owner Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a confident small business owner in a bright, modern office setting. The lighting is soft and natural, creating a welcoming and trustworthy atmosphere. The overall style is clean, modern, and high-quality, fitting a premium SaaS platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8tnZLvO4EFSfGerlfi3GF-jOqdh--TF73Ar8GxQblUP-RGXSubeMqmspNcQ87l1lvhQvDe-Pxv8GhKAtdTCNYBXNh1JrokTRZ2r_tZeQuFQUvjJVH-ivEUwOKtxj7kUVHZsW33WHR7dGzS7B1QnnjzWE3NDpJ6SPQQxfrIzy4y0egE5-D_Gdufp4cJSV1jFBDLx3bZWQpnao7gNqmvccbXLvTvI_cW_QLR6sf6ruLj4nb5nnc58SmjVUmv9AjQsdFQzx9DU6p4-nl"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-md md:p-xl overflow-y-auto">
+<div class="max-w-container-max mx-auto max-w-5xl">
+<div class="mb-lg">
+<h2 class="text-headline-lg font-headline-lg text-on-background mb-2">Get More Bookings</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Share your unique link with customers so they can book your services anytime.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column: Actions -->
+<div class="lg:col-span-2 flex flex-col gap-lg">
+<!-- Main Share Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-8 -mt-8 z-0"></div>
+<div class="relative z-10">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-4">Your Booking Link</h3>
+<div class="flex flex-col sm:flex-row gap-4 mb-6">
+<div class="flex-1 bg-surface border border-outline-variant rounded-lg flex items-center px-4 py-3 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-secondary mr-3" data-icon="link">link</span>
+<input class="w-full bg-transparent border-none p-0 text-body-md font-body-md text-on-surface focus:ring-0" id="booking-link-input" readonly="" type="text" value="slotpe.com/my-business"/>
+</div>
+<button class="bg-primary text-on-primary hover:bg-on-primary-fixed-variant transition-colors rounded-lg px-6 py-3 font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm whitespace-nowrap" onclick="copyLink()">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+                                        Copy Link
+                                    </button>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex-1 bg-[#25D366] text-white hover:bg-[#1DA851] transition-colors rounded-lg px-6 py-3 font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="chat">chat</span>
+                                        Share on WhatsApp
+                                    </button>
+<button class="flex-1 bg-surface border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors rounded-lg px-6 py-3 font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+                                        More Options
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Tips Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md font-bold text-on-surface mb-1">Instagram Bio</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Add the link to your profile bio to convert followers into customers.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md font-bold text-on-surface mb-1">Google Maps</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Update your business profile with this booking link.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: QR & Preview -->
+<div class="flex flex-col gap-lg">
+<!-- QR Code Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col items-center text-center">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Scan to Book</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">Print this for your front desk</p>
+<div class="w-48 h-48 bg-surface-bright border border-outline-variant rounded-lg p-2 mb-6">
+<img alt="QR Code Placeholder" class="w-full h-full object-cover mix-blend-multiply opacity-80" data-alt="A clean, high-contrast black and white QR code pattern displayed on a modern, sleek digital screen. The lighting is bright and evenly distributed, highlighting the sharp geometric shapes of the QR code against a pristine white background. The overall aesthetic is professional, minimalist, and tech-forward." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCslzl8wVKi32X-Qj9jR2TrrS-xJpEEPtwm1nflt_4G9AwCMhSCiY3y-e7_s9Jb3E6eq1VrICoJDZ5hGAWbWVoT4pC8L40F5aZWZQ2rIoqoRY5rb8NiMBjWufH3lbDINQeztRQsgeAcfEoPpeJxSC1rYmOsTudZZGtAn3MIaTUphRjK_IG-fvss5lLCKIkMPZaHLc24WSrec37b9QoIt-P-a1hilQvxsBR7mayjKcqVs4pTyq56OW8YS8Y9whw-94onAxmT-pMBjblB"/>
+</div>
+<button class="text-primary hover:text-on-primary-fixed-variant font-label-md text-label-md flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                                Download QR Code
+                            </button>
+</div>
+<!-- Mini Preview -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="bg-surface-container-low px-4 py-3 border-b border-outline-variant flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Public Page Preview</span>
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="visibility">visibility</span>
+</div>
+<div class="p-4 bg-surface-bright flex-1 flex flex-col items-center text-center opacity-80 pointer-events-none">
+<div class="w-16 h-16 rounded-full bg-secondary-container mb-3 border-2 border-surface-container-lowest shadow-sm"></div>
+<h5 class="text-label-md font-label-md font-bold text-on-surface mb-1">My Business Name</h5>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">Book an appointment</p>
+<div class="w-full bg-primary-container text-on-primary-container py-2 rounded-lg text-label-sm font-label-sm mb-2">Select Service</div>
+<div class="w-full bg-surface border border-outline-variant py-2 rounded-lg text-label-sm font-label-sm text-on-surface-variant">View Availability</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Toast Notification (Hidden by default) -->
+<div class="fixed bottom-lg left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-lg shadow-lg flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none z-50" id="toast">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="check_circle">check_circle</span>
+<span class="text-body-md font-body-md">Link copied to clipboard!</span>
+</div>
+<script>
+        function copyLink() {
+            const copyText = document.getElementById("booking-link-input");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            navigator.clipboard.writeText(copyText.value);
+            
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.classList.remove("opacity-0");
+            toast.classList.add("opacity-100");
+            
+            setTimeout(() => {
+                toast.classList.remove("opacity-100");
+                toast.classList.add("opacity-0");
+            }, 3000);
+        }
+    </script>
+</body></html>

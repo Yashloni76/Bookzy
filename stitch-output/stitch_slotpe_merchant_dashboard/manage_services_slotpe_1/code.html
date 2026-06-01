@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slotpe - Services</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#54647a",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-fixed": "#d3e4fe",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-tint": "#0053db",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c3c6d7",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#515659",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-surface": "#121c2a",
+                        "on-surface-variant": "#434655",
+                        "surface-container-high": "#dee9fc",
+                        "tertiary-fixed": "#dfe3e7",
+                        "on-tertiary-fixed-variant": "#43474b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-dim": "#d0dbed",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#27313f",
+                        "outline": "#737686",
+                        "on-tertiary-fixed": "#171c1f",
+                        "surface-container": "#e6eeff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#2563eb",
+                        "tertiary-fixed-dim": "#c3c7cb",
+                        "primary": "#004ac6",
+                        "surface": "#f8f9ff",
+                        "secondary": "#505f76",
+                        "tertiary-container": "#696e71",
+                        "on-primary-container": "#eeefff",
+                        "on-background": "#121c2a",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d9e3f6",
+                        "inverse-primary": "#b4c5ff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-tertiary-container": "#edf1f5",
+                        "secondary-container": "#d0e1fb",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "3xl": "64px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "2xl": "48px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-container-low docked full-width top-0 border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-lg py-md h-16 ml-64 fixed z-10">
+<div class="flex items-center gap-md">
+<!-- Brand removed for top app bar to follow minimalism as per user guidance if preferred, or keep as JSON says -->
+<span class="text-headline-md font-headline-md font-extrabold text-on-surface dark:text-inverse-on-surface md:hidden">Slotpe</span>
+<h1 class="text-headline-md font-headline-md hidden md:block">Services</h1>
+</div>
+<div class="flex items-center gap-md">
+<button aria-label="notifications" class="text-on-surface-variant hover:text-primary transition-opacity p-sm rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="help_outline" class="text-on-surface-variant hover:text-primary transition-opacity p-sm rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-label-sm ml-sm overflow-hidden border border-outline-variant">
+<img alt="Business Owner Avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN1jlulYK9UY5uaQfL2o_QyD4HONcj0oPyailcCXN-5fSntc0Aqwxpt7zfH_FfD_o2BVg_MT0FwQE5dao8CSkKrqm8na2Il67YSZreIF77pX6J3Nxhy1-ida-nCXSSr8VhrOcZBjdb_1ba4ojfWpvk9ESZE0HLZu3Jlwb0ar_F3xm9jB_-3QignKg4M7w4WbtRwtIUvvlpBfHs4DatV3iRPcl8xwl6MBiY2RzfZsx_PGPiMlGI6Xu2hdhajGcIDk_-vLx2iH5EY7L9"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-surface-dim h-full w-64 border-r border-outline-variant dark:border-outline fixed left-0 top-0 flex flex-col py-lg z-20 hidden md:flex">
+<div class="px-lg mb-xl">
+<h2 class="text-headline-lg font-headline-lg font-bold text-primary dark:text-inverse-primary">Slotpe</h2>
+<p class="text-label-sm font-label-sm text-secondary mt-xs">Premium SaaS</p>
+</div>
+<ul class="flex flex-col gap-sm px-md flex-grow">
+<!-- Today -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+                    Today
+                </a>
+</li>
+<!-- Bookings -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">event_note</span>
+                    Bookings
+                </a>
+</li>
+<!-- Services (Active) -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-primary dark:border-inverse-primary bg-primary-container/10 scale-[0.98] transition-all duration-150 text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+                    Services
+                </a>
+</li>
+<!-- Settings -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</li>
+<!-- Share Link -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">share</span>
+                    Share Link
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content -->
+<main class="md:ml-64 pt-16 min-h-screen flex flex-col">
+<div class="px-xl py-lg flex-grow max-w-container-max mx-auto w-full">
+<!-- Page Header Actions -->
+<div class="flex justify-between items-center mb-xl">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Manage Services</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-xs">Create and manage your offerings for clients to book.</p>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full text-label-md font-label-md flex items-center gap-xs hover:bg-primary/90 transition-colors shadow-sm" onclick="toggleDrawer()">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Add Service
+                </button>
+</div>
+<!-- Services List (Glassmorphism/Clean Card Style) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.05)]">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant">
+<th class="px-md py-sm text-label-sm font-label-sm text-on-surface-variant font-semibold">Service Name</th>
+<th class="px-md py-sm text-label-sm font-label-sm text-on-surface-variant font-semibold">Duration</th>
+<th class="px-md py-sm text-label-sm font-label-sm text-on-surface-variant font-semibold">Price (INR)</th>
+<th class="px-md py-sm text-label-sm font-label-sm text-on-surface-variant font-semibold text-center">Status</th>
+<th class="px-md py-sm text-label-sm font-label-sm text-on-surface-variant font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant hover:bg-surface-bright transition-colors">
+<td class="px-md py-md font-medium">Initial Consultation</td>
+<td class="px-md py-md text-on-surface-variant">30 min</td>
+<td class="px-md py-md">₹ 500</td>
+<td class="px-md py-md text-center">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-[#E6F4EA] text-[#137333] text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-[#137333]"></span> Active
+                                </span>
+</td>
+<td class="px-md py-md text-right">
+<button aria-label="Edit" class="text-on-surface-variant hover:text-primary transition-colors p-xs">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button aria-label="Delete" class="text-on-surface-variant hover:text-error transition-colors p-xs ml-xs">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant hover:bg-surface-bright transition-colors">
+<td class="px-md py-md font-medium">Deep Cleaning Session</td>
+<td class="px-md py-md text-on-surface-variant">120 min</td>
+<td class="px-md py-md">₹ 2,500</td>
+<td class="px-md py-md text-center">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-[#E6F4EA] text-[#137333] text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-[#137333]"></span> Active
+                                </span>
+</td>
+<td class="px-md py-md text-right">
+<button aria-label="Edit" class="text-on-surface-variant hover:text-primary transition-colors p-xs">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button aria-label="Delete" class="text-on-surface-variant hover:text-error transition-colors p-xs ml-xs">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="px-md py-md font-medium text-on-surface-variant">Follow-up Review</td>
+<td class="px-md py-md text-on-surface-variant">15 min</td>
+<td class="px-md py-md text-on-surface-variant">₹ 0</td>
+<td class="px-md py-md text-center">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-surface-variant text-on-surface-variant text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-outline"></span> Inactive
+                                </span>
+</td>
+<td class="px-md py-md text-right">
+<button aria-label="Edit" class="text-on-surface-variant hover:text-primary transition-colors p-xs">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button aria-label="Delete" class="text-on-surface-variant hover:text-error transition-colors p-xs ml-xs">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- Overlay & Drawer for Add New Service -->
+<div class="fixed inset-0 bg-on-surface/20 backdrop-blur-sm z-40 hidden transition-opacity opacity-0" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<aside class="fixed top-0 right-0 h-full w-full max-w-md bg-surface-container-lowest shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col border-l border-outline-variant" id="addServiceDrawer">
+<div class="px-xl py-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h3 class="text-headline-md font-headline-md text-on-surface">Add New Service</h3>
+<button class="text-on-surface-variant hover:text-on-surface p-sm rounded-full hover:bg-surface-container transition-colors" onclick="toggleDrawer()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-xl flex-grow overflow-y-auto flex flex-col gap-lg">
+<!-- Form Fields -->
+<!-- Name Input -->
+<div class="flex flex-col gap-xs">
+<label class="text-body-sm font-body-sm font-bold text-on-surface" for="serviceName">Service Name</label>
+<input class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-shadow" id="serviceName" placeholder="e.g. Consultation" type="text"/>
+</div>
+<!-- Duration Dropdown -->
+<div class="flex flex-col gap-xs">
+<label class="text-body-sm font-body-sm font-bold text-on-surface" for="serviceDuration">Duration</label>
+<div class="relative">
+<select class="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface appearance-none focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-shadow" id="serviceDuration">
+<option value="15">15 minutes</option>
+<option selected="" value="30">30 minutes</option>
+<option value="45">45 minutes</option>
+<option value="60">60 minutes (1 hour)</option>
+<option value="90">90 minutes</option>
+<option value="120">120 minutes (2 hours)</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Price Input -->
+<div class="flex flex-col gap-xs">
+<label class="text-body-sm font-body-sm font-bold text-on-surface" for="servicePrice">Price (INR)</label>
+<div class="relative">
+<span class="absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">₹</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-shadow" id="servicePrice" placeholder="0" type="number"/>
+</div>
+</div>
+<!-- Active Toggle -->
+<div class="flex items-center justify-between mt-md p-md bg-surface border border-outline-variant rounded-lg">
+<div>
+<p class="text-body-sm font-body-sm font-bold text-on-surface">Active Status</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Allow clients to book this service</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<div class="p-xl border-t border-outline-variant bg-surface-bright flex justify-end gap-md">
+<button class="px-lg py-sm text-primary font-label-md text-label-md hover:bg-primary/10 rounded-full transition-colors" onclick="toggleDrawer()">Cancel</button>
+<button class="px-lg py-sm bg-primary text-on-primary font-label-md text-label-md rounded-full hover:bg-primary/90 transition-colors shadow-sm">Save Service</button>
+</div>
+</aside>
+<script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('addServiceDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            
+            if (drawer.classList.contains('translate-x-full')) {
+                // Open
+                overlay.classList.remove('hidden');
+                // Small delay to allow display:block to apply before animating opacity
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                // Close
+                overlay.classList.add('opacity-0');
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300); // match transition duration
+            }
+        }
+    </script>
+</body></html>

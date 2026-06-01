@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slotpe - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#54647a",
+                      "on-primary-fixed": "#00174b",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "surface-container-low": "#eff4ff",
+                      "secondary-fixed": "#d3e4fe",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "surface-bright": "#f8f9ff",
+                      "surface-tint": "#0053db",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c3c6d7",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#515659",
+                      "surface-container-highest": "#d9e3f6",
+                      "on-surface": "#121c2a",
+                      "on-surface-variant": "#434655",
+                      "surface-container-high": "#dee9fc",
+                      "tertiary-fixed": "#dfe3e7",
+                      "on-tertiary-fixed-variant": "#43474b",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#0b1c30",
+                      "surface-dim": "#d0dbed",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#27313f",
+                      "outline": "#737686",
+                      "on-tertiary-fixed": "#171c1f",
+                      "surface-container": "#e6eeff",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#2563eb",
+                      "tertiary-fixed-dim": "#c3c7cb",
+                      "primary": "#004ac6",
+                      "surface": "#f8f9ff",
+                      "secondary": "#505f76",
+                      "tertiary-container": "#696e71",
+                      "on-primary-container": "#eeefff",
+                      "on-background": "#121c2a",
+                      "primary-fixed": "#dbe1ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-variant": "#d9e3f6",
+                      "inverse-primary": "#b4c5ff",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-tertiary-container": "#edf1f5",
+                      "secondary-container": "#d0e1fb",
+                      "background": "#f8f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "sm": "8px",
+                      "gutter": "24px",
+                      "md": "16px",
+                      "3xl": "64px",
+                      "base": "4px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "2xl": "48px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "headline-xl": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-xl": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom input focus ring to match guidelines */
+        .premium-input:focus-within {
+            border-color: #004ac6;
+            box-shadow: 0 0 0 3px rgba(0, 74, 198, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center justify-center p-md md:p-lg antialiased">
+<!-- Branding -->
+<div class="mb-xl flex justify-center w-full">
+<img alt="Slotpe Logo" class="h-10 w-auto object-contain" src="data:image/png;base64,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"/>
+</div>
+<!-- Wizard Container -->
+<main class="w-full max-w-[720px] bg-surface-container-lowest rounded-xl border border-outline-variant p-lg md:p-2xl shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.05),_0px_2px_4px_-2px_rgba(0,0,0,0.05)]">
+<!-- Stepper Navigation -->
+<div class="mb-2xl relative">
+<div class="flex items-center justify-between relative z-10">
+<!-- Step 1: Active -->
+<div class="flex flex-col items-center gap-sm bg-surface-container-lowest px-sm relative group">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md font-bold shadow-sm ring-4 ring-surface-container-lowest">1</div>
+<span class="font-label-sm text-label-sm text-primary font-bold absolute top-10 whitespace-nowrap">Business Profile</span>
+</div>
+<!-- Connecting Line (Active -> Inactive) -->
+<div class="flex-1 h-[2px] bg-surface-variant rounded-full mx-sm">
+<div class="w-1/4 h-full bg-primary rounded-full"></div>
+</div>
+<!-- Step 2: Inactive -->
+<div class="flex flex-col items-center gap-sm bg-surface-container-lowest px-sm relative">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md ring-4 ring-surface-container-lowest">2</div>
+<span class="font-label-sm text-label-sm text-secondary absolute top-10 whitespace-nowrap">Services</span>
+</div>
+<!-- Connecting Line -->
+<div class="flex-1 h-[2px] bg-surface-variant rounded-full mx-sm"></div>
+<!-- Step 3: Inactive -->
+<div class="flex flex-col items-center gap-sm bg-surface-container-lowest px-sm relative">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md ring-4 ring-surface-container-lowest">3</div>
+<span class="font-label-sm text-label-sm text-secondary absolute top-10 whitespace-nowrap hidden sm:block">Working Hours</span>
+<span class="font-label-sm text-label-sm text-secondary absolute top-10 whitespace-nowrap sm:hidden">Hours</span>
+</div>
+<!-- Connecting Line -->
+<div class="flex-1 h-[2px] bg-surface-variant rounded-full mx-sm"></div>
+<!-- Step 4: Inactive -->
+<div class="flex flex-col items-center gap-sm bg-surface-container-lowest px-sm relative">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary absolute top-10 whitespace-nowrap">Finish</span>
+</div>
+</div>
+<!-- Spacer to account for absolute positioned labels -->
+<div class="h-6"></div>
+</div>
+<!-- Header -->
+<header class="mb-xl text-center sm:text-left">
+<h1 class="font-headline-lg text-headline-lg text-on-surface md:font-headline-lg md:text-headline-lg mb-sm">Business Profile</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Let's start by setting up your core business identity.</p>
+</header>
+<!-- Form -->
+<form action="#" class="space-y-lg">
+<!-- Business Name -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-bold" for="businessName">Business Name <span class="text-error">*</span></label>
+<div class="premium-input rounded-DEFAULT border border-outline-variant bg-surface-container-lowest transition-all overflow-hidden flex">
+<input class="w-full bg-transparent px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none border-none ring-0 placeholder:text-outline" id="businessName" name="businessName" placeholder="e.g. The Glamour Studio" required="" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Category -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-bold" for="category">Category <span class="text-error">*</span></label>
+<div class="premium-input rounded-DEFAULT border border-outline-variant bg-surface-container-lowest transition-all overflow-hidden relative">
+<select class="w-full bg-transparent px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none border-none ring-0 appearance-none pr-xl cursor-pointer" id="category" name="category" required="">
+<option disabled="" selected="" value="">Select category...</option>
+<option value="salon">Salon</option>
+<option value="tutor">Tutor</option>
+<option value="clinic">Clinic</option>
+<option value="coaching">Coaching Centre</option>
+<option value="fitness">Fitness/Yoga</option>
+<option value="freelancer">Freelancer</option>
+<option value="other">Other</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- City -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-bold" for="city">City <span class="text-error">*</span></label>
+<div class="premium-input rounded-DEFAULT border border-outline-variant bg-surface-container-lowest transition-all overflow-hidden flex">
+<span class="material-symbols-outlined pl-md py-sm text-outline flex items-center justify-center">location_on</span>
+<input class="w-full bg-transparent px-sm py-sm font-body-md text-body-md text-on-surface focus:outline-none border-none ring-0 placeholder:text-outline" id="city" name="city" placeholder="e.g. Mumbai" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- WhatsApp Number -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-bold" for="whatsapp">WhatsApp Number <span class="text-error">*</span></label>
+<div class="premium-input rounded-DEFAULT border border-outline-variant bg-surface-container-lowest transition-all overflow-hidden flex items-stretch">
+<div class="bg-surface px-md flex items-center justify-center border-r border-outline-variant font-body-md text-body-md text-on-surface-variant select-none">
+                        +91
+                    </div>
+<input class="w-full bg-transparent px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none border-none ring-0 placeholder:text-outline" id="whatsapp" name="whatsapp" pattern="[0-9]{10}" placeholder="98765 43210" required="" type="tel"/>
+</div>
+<p class="font-label-sm text-label-sm text-secondary font-normal mt-1">Used for sending booking confirmations to your clients.</p>
+</div>
+<!-- Description -->
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface font-bold" for="description">Description</label>
+<span class="font-label-sm text-label-sm text-outline">Optional</span>
+</div>
+<div class="premium-input rounded-DEFAULT border border-outline-variant bg-surface-container-lowest transition-all overflow-hidden flex">
+<textarea class="w-full bg-transparent px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none border-none ring-0 placeholder:text-outline resize-none" id="description" name="description" placeholder="Briefly describe your services..." rows="3"></textarea>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-xl border-t border-outline-variant mt-2xl flex justify-end">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-xl py-sm rounded-DEFAULT hover:bg-primary/90 transition-colors flex items-center justify-center gap-sm active:scale-[0.98]" type="button">
+                    Next: Add Services
+                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</form>
+</main>
+</body></html>

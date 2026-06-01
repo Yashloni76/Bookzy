@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slotpe - Bookings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#54647a",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-fixed": "#d3e4fe",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-tint": "#0053db",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c3c6d7",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#515659",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-surface": "#121c2a",
+                        "on-surface-variant": "#434655",
+                        "surface-container-high": "#dee9fc",
+                        "tertiary-fixed": "#dfe3e7",
+                        "on-tertiary-fixed-variant": "#43474b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-dim": "#d0dbed",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#27313f",
+                        "outline": "#737686",
+                        "on-tertiary-fixed": "#171c1f",
+                        "surface-container": "#e6eeff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#2563eb",
+                        "tertiary-fixed-dim": "#c3c7cb",
+                        "primary": "#004ac6",
+                        "surface": "#f8f9ff",
+                        "secondary": "#505f76",
+                        "tertiary-container": "#696e71",
+                        "on-primary-container": "#eeefff",
+                        "on-background": "#121c2a",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d9e3f6",
+                        "inverse-primary": "#b4c5ff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-tertiary-container": "#edf1f5",
+                        "secondary-container": "#d0e1fb",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "3xl": "64px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "2xl": "48px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full flex flex-col py-lg bg-surface dark:bg-surface-dim h-full w-64 border-r border-outline-variant z-20 hidden md:flex">
+<div class="px-lg mb-xl">
+<h1 class="text-headline-lg font-headline-lg font-bold text-primary dark:text-inverse-primary">Slotpe</h1>
+<p class="text-label-md font-label-md text-secondary mt-xs">Premium SaaS</p>
+</div>
+<ul class="flex flex-col flex-1 gap-sm px-md">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-label-md">Today</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-primary dark:border-inverse-primary bg-primary-container/10 active:scale-[0.98] transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="event_note" data-weight="fill" style="font-variation-settings: 'FILL' 1;">event_note</span>
+<span class="text-label-md font-label-md">Bookings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="text-label-md font-label-md">Services</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+<span class="text-label-md font-label-md">Share Link</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-lg pt-lg border-t border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Slotpe Logo" class="w-full h-full object-cover" data-alt="A professional headshot of a business owner, a man with short brown hair and a light beard, wearing a crisp white shirt, standing against a clean, neutral background. High-quality lighting, soft shadows, modern aesthetic fitting a premium business software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl-byDhCMhS0h2UJSDSGI4V0YKUrXkENvA0CxMoxwlhpHxav1m9g6L3a2WpAPM46nXDe53iV690ms1WParbn26oxpKNCX-e1oUFqm4E5160Uu0LYnnvEYX1LvIlD62h9ursY72qH2jswaaNl_kBoeD651MbJ1_BcHdKkzdRuCBREkVXuuvQSJNQZii6oUYSXHp7UXixqZVA7v0xZvDWgiOyzG8QXpJCVuIjhsZqazodzeNSlGuJm_Lz_PGP-TVNHrTg55dvkspYDsZ"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-lg py-md h-16 bg-surface-container-lowest dark:bg-surface-container-low border-b border-outline-variant dark:border-outline sticky top-0 z-10">
+<div class="flex items-center gap-md md:hidden">
+<button class="p-2 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-headline-md font-headline-md font-extrabold text-on-surface dark:text-inverse-on-surface">Slotpe</h2>
+</div>
+<div class="hidden md:block">
+<h2 class="text-headline-md font-headline-md text-on-surface font-semibold">Bookings</h2>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-opacity">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="md:hidden w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Business Owner Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5nRGa2l0aqSh9iZuv3E6VUE_lUgu9R4ZhWRZSB55sFZcLSWGpZ0-76Y65v3phcoLHv20HnFVL9MvMAohOGS7zoQTDU6LyAIS88imto91-SOypOtslPfOcPQPBKRmsuB-mYywxfXg186x4Gm0HN5d88Tg6rthRXkcesggIGUG-OeCGLMuTrIaKz5mLXjLc_Bk3-r9AirC6mKWtqBwzcvZldC0Ug0PnacvumVEV3uiQAIUCQ-kbR4NWfX7V_LP4SkWnKP7xBxdDmhVs"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-md md:p-xl flex-1 flex flex-col gap-lg max-w-container-max mx-auto w-full">
+<!-- Actions & Filters Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md">
+<div class="flex flex-wrap items-center gap-sm w-full sm:w-auto">
+<!-- Date Filter Dropdown (Visual only) -->
+<div class="relative inline-block text-left">
+<button aria-expanded="true" aria-haspopup="true" class="inline-flex items-center justify-between gap-sm w-full sm:w-auto px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-sm font-body-sm text-on-surface hover:border-outline focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary transition-all shadow-sm" id="date-menu-button" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">calendar_month</span>
+                            This Week
+                            <span class="material-symbols-outlined text-[18px] text-on-surface-variant">expand_more</span>
+</button>
+</div>
+<!-- Status Filter Dropdown (Visual only) -->
+<div class="relative inline-block text-left">
+<button class="inline-flex items-center justify-between gap-sm w-full sm:w-auto px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-sm font-body-sm text-on-surface hover:border-outline focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">filter_list</span>
+                            All Statuses
+                            <span class="material-symbols-outlined text-[18px] text-on-surface-variant">expand_more</span>
+</button>
+</div>
+</div>
+<button class="inline-flex items-center gap-sm px-4 py-2 bg-primary text-on-primary rounded-lg text-label-md font-label-md hover:bg-on-primary-fixed-variant transition-colors shadow-sm whitespace-nowrap w-full sm:w-auto justify-center">
+<span class="material-symbols-outlined text-[18px]">block</span>
+                    Block Slot
+                </button>
+</div>
+<!-- Bookings List/Table Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm flex-1">
+<!-- Desktop Table View -->
+<div class="hidden md:block overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-bright">
+<th class="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Date &amp; Time</th>
+<th class="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Customer</th>
+<th class="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Service</th>
+<th class="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="py-3 px-4 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-body-sm font-body-sm divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-on-surface font-medium">Oct 24, 2023</div>
+<div class="text-on-surface-variant text-label-sm font-label-sm mt-1">10:00 AM - 11:00 AM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-primary flex items-center justify-center font-bold text-label-sm">
+                                            JS
+                                        </div>
+<div>
+<div class="text-on-surface font-medium">John Smith</div>
+<div class="text-on-surface-variant text-label-sm font-label-sm">+91 98765 43210</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface">Consultation</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm">
+                                        Confirmed
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap">
+<button class="text-secondary hover:text-primary p-2 rounded-lg transition-colors" title="Mark Complete">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</button>
+<button class="text-secondary hover:text-error p-2 rounded-lg transition-colors ml-1" title="Cancel/No-show">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-on-surface font-medium">Oct 24, 2023</div>
+<div class="text-on-surface-variant text-label-sm font-label-sm mt-1">11:30 AM - 12:30 PM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-primary flex items-center justify-center font-bold text-label-sm">
+                                            AR
+                                        </div>
+<div>
+<div class="text-on-surface font-medium">Anita Roy</div>
+<div class="text-on-surface-variant text-label-sm font-label-sm">+91 91234 56780</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface">Premium Service</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-surface-container-highest text-tertiary text-label-sm font-label-sm">
+                                        Completed
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap opacity-50 pointer-events-none">
+<button class="text-secondary p-2 rounded-lg ml-1">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="text-on-surface font-medium">Oct 25, 2023</div>
+<div class="text-on-surface-variant text-label-sm font-label-sm mt-1">02:00 PM - 03:00 PM</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-primary flex items-center justify-center font-bold text-label-sm">
+                                            MK
+                                        </div>
+<div>
+<div class="text-on-surface font-medium">Mohit Kumar</div>
+<div class="text-on-surface-variant text-label-sm font-label-sm">+91 99887 76655</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface">Follow-up</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-error-container text-on-error-container text-label-sm font-label-sm">
+                                        No-Show
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap opacity-50 pointer-events-none">
+<button class="text-secondary p-2 rounded-lg ml-1">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Mobile Card View -->
+<div class="md:hidden flex flex-col divide-y divide-outline-variant">
+<!-- Card 1 -->
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div>
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Oct 24, 2023 • 10:00 AM</div>
+<div class="text-body-md font-body-md font-medium text-on-surface">John Smith</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Consultation</div>
+</div>
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-secondary-container text-on-secondary-fixed text-[10px] font-bold tracking-wider uppercase">
+                                Confirmed
+                            </span>
+</div>
+<div class="flex justify-end gap-2 mt-2 pt-2 border-t border-outline-variant/50">
+<button class="inline-flex items-center gap-1 px-3 py-1.5 border border-outline-variant rounded-lg text-label-sm font-label-sm text-on-surface hover:bg-surface-bright">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+                                Cancel
+                            </button>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 bg-primary/10 text-primary rounded-lg text-label-sm font-label-sm hover:bg-primary/20">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                Complete
+                            </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-md flex flex-col gap-sm opacity-70">
+<div class="flex justify-between items-start">
+<div>
+<div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Oct 24, 2023 • 11:30 AM</div>
+<div class="text-body-md font-body-md font-medium text-on-surface">Anita Roy</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">Premium Service</div>
+</div>
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-surface-container-highest text-tertiary text-[10px] font-bold tracking-wider uppercase">
+                                Completed
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

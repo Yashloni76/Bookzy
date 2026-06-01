@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slotpe - Professional Booking Management</title>
+<!-- Fonts: Inter for UI, Geist for Headlines -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "primary": "#004ac6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#0b1c30",
+                    "on-primary-fixed": "#00174b",
+                    "on-primary-container": "#eeefff",
+                    "tertiary-fixed-dim": "#c3c7cb",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d0dbed",
+                    "surface-container": "#e6eeff",
+                    "background": "#f8f9ff",
+                    "outline": "#737686",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary-fixed": "#d3e4fe",
+                    "surface-variant": "#d9e3f6",
+                    "inverse-surface": "#27313f",
+                    "on-tertiary-fixed": "#171c1f",
+                    "surface-tint": "#0053db",
+                    "outline-variant": "#c3c6d7",
+                    "tertiary-container": "#696e71",
+                    "on-surface": "#121c2a",
+                    "on-surface-variant": "#434655",
+                    "surface-container-high": "#dee9fc",
+                    "on-tertiary-container": "#edf1f5",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "surface": "#f8f9ff",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-container": "#d0e1fb",
+                    "on-tertiary-fixed-variant": "#43474b",
+                    "on-background": "#121c2a",
+                    "inverse-primary": "#b4c5ff",
+                    "primary-container": "#2563eb",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container-highest": "#d9e3f6",
+                    "on-secondary-container": "#54647a",
+                    "secondary": "#505f76",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#dfe3e7",
+                    "error": "#ba1a1a",
+                    "tertiary": "#515659"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "2xl": "48px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "3xl": "64px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "gutter": "24px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "headline-xl": ["Geist"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Geist"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom base styles for utilities */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Hide number input spinners for clean OTP fields */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen font-body-md text-body-md text-on-surface antialiased selection:bg-primary/20 selection:text-primary">
+<!-- Asymmetric Layout Container -->
+<main class="flex min-h-screen w-full">
+<!-- Left Column: Atmospheric Brand Imagery (Hidden on mobile) -->
+<section class="hidden lg:flex w-1/2 relative bg-surface-container overflow-hidden items-center justify-center">
+<!-- Background Image -->
+<img alt="Modern Office" class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A high-end, modern architectural office space flooded with soft, natural light entering through large floor-to-ceiling windows. The scene embodies a clean, professional aesthetic with minimalist white surfaces, subtle geometric shadows, and a calm, trustworthy atmosphere. A hint of blue from the sky outside softly reflects on the polished floors, harmonizing perfectly with the brand's crisp, light-mode visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBAzhmVYvv3kfzOStgX3WXEy3m_SY_o3MWMN1pf1Ii918eRnf0lFfA7eMvS5yhO2Q2aWWUBL4Ek2Rst3U2Vv7Hd5KvPX1aMPqOafIVtzO-lfsJxmhtLoS77Flkal3fMI6o40K85HGx6ip-2iYtKTF4XMIw42OjfpXBiCDsrfxe3c2H2vntobINUMlV2o1siCGFZ4gRWefbrrR6Yxf0GNvJc0VcuBXaw7BJMYn0PUQxNddm4jO4_kmfw_1RwKEti05-B2tjQlkc9wWC"/>
+<!-- Tonal Overlay -->
+<div class="absolute inset-0 bg-primary-fixed/20 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background/40 to-background/10"></div>
+<!-- Brand Badge Floating -->
+<div class="relative z-10 bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/50 p-xl rounded-2xl shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),_0px_8px_10px_-6px_rgba(0,0,0,0.1)] max-w-sm text-center transform -translate-y-8">
+<span class="material-symbols-outlined text-4xl text-primary mb-md" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Premium Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Streamline your scheduling workflow with enterprise-grade clarity and reliability.</p>
+</div>
+</section>
+<!-- Right Column: Interactive Canvas -->
+<section class="w-full lg:w-1/2 flex items-center justify-center p-md sm:p-xl bg-surface-container-lowest relative z-10 shadow-[-10px_0_30px_rgba(0,0,0,0.02)]">
+<!-- Form Container -->
+<div class="w-full max-w-[400px]">
+<!-- Logo Anchor -->
+<div class="mb-2xl flex items-center gap-xs">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-xl" style="font-variation-settings: 'FILL' 1;">event_available</span>
+</div>
+<span class="font-headline-xl text-headline-xl font-black text-on-surface tracking-tight">Slotpe</span>
+</div>
+<!-- View 1: Email Entry -->
+<div class="transition-opacity duration-300 opacity-100" id="view-email">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-sm">Sign in to manage your bookings</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Enter your professional email address to continue.</p>
+<form class="space-y-lg" id="email-form">
+<div class="space-y-xs">
+<label class="font-body-sm text-body-sm font-bold text-on-surface block" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline-variant">mail</span>
+<input class="w-full pl-2xl pr-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-all duration-200" id="email" placeholder="name@business.com" required="" type="email"/>
+</div>
+</div>
+<div class="pt-sm space-y-md">
+<button class="w-full bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md py-[12px] px-lg rounded-lg flex items-center justify-center gap-sm transition-colors shadow-sm" type="submit">
+                                Send login code
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+<span class="font-body-sm text-body-sm">No password needed</span>
+</div>
+</div>
+</form>
+</div>
+<!-- View 2: OTP Entry (Initially Hidden) -->
+<div class="hidden transition-opacity duration-300 opacity-0 transform translate-y-4" id="view-otp">
+<button class="mb-lg flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm group" id="btn-back" type="button">
+<span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                        Back
+                    </button>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-sm">Check your email</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">
+                        We sent a 6-digit verification code to <br/>
+<span class="font-semibold text-on-surface" id="display-email"></span>
+</p>
+<form class="space-y-lg" id="otp-form">
+<div class="space-y-xs">
+<label class="font-body-sm text-body-sm font-bold text-on-surface block">Verification Code</label>
+<div class="flex justify-between gap-sm" id="otp-container">
+<!-- 6 Input Boxes for OTP -->
+<input class="w-12 h-14 text-center font-headline-md text-headline-md text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-all duration-200" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input class="w-12 h-14 text-center font-headline-md text-headline-md text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-all duration-200" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input class="w-12 h-14 text-center font-headline-md text-headline-md text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-all duration-200" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input class="w-12 h-14 text-center font-headline-md text-headline-md text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-all duration-200" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input class="w-12 h-14 text-center font-headline-md text-headline-md text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-all duration-200" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input class="w-12 h-14 text-center font-headline-md text-headline-md text-on-surface bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-all duration-200" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+</div>
+</div>
+<div class="pt-sm space-y-md">
+<button class="w-full bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md py-[12px] px-lg rounded-lg transition-colors shadow-sm" type="submit">
+                                Verify code
+                            </button>
+<div class="text-center">
+<button class="font-label-md text-label-md text-primary hover:text-on-primary-fixed-variant underline underline-offset-4 transition-colors" type="button">
+                                    Resend code
+                                </button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<!-- Global Footer minimal -->
+<div class="absolute bottom-md w-full text-center text-outline font-label-sm text-label-sm">
+                © 2024 Slotpe Inc.
+            </div>
+</section>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewEmail = document.getElementById('view-email');
+            const viewOtp = document.getElementById('view-otp');
+            const emailForm = document.getElementById('email-form');
+            const emailInput = document.getElementById('email');
+            const displayEmail = document.getElementById('display-email');
+            const btnBack = document.getElementById('btn-back');
+            const otpInputs = document.querySelectorAll('#otp-container input');
+
+            // Switch to OTP View
+            emailForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if(emailInput.value) {
+                    displayEmail.textContent = emailInput.value;
+                    
+                    // Fade out email view
+                    viewEmail.classList.remove('opacity-100');
+                    viewEmail.classList.add('opacity-0', 'pointer-events-none');
+                    
+                    setTimeout(() => {
+                        viewEmail.classList.add('hidden');
+                        viewOtp.classList.remove('hidden');
+                        
+                        // Trigger reflow for transition
+                        void viewOtp.offsetWidth; 
+                        
+                        // Fade in OTP view
+                        viewOtp.classList.remove('opacity-0', 'translate-y-4');
+                        viewOtp.classList.add('opacity-100', 'translate-y-0');
+                        
+                        // Focus first OTP input
+                        otpInputs[0].focus();
+                    }, 300);
+                }
+            });
+
+            // Switch back to Email View
+            btnBack.addEventListener('click', () => {
+                viewOtp.classList.remove('opacity-100', 'translate-y-0');
+                viewOtp.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                
+                setTimeout(() => {
+                    viewOtp.classList.add('hidden');
+                    viewOtp.classList.remove('pointer-events-none');
+                    viewEmail.classList.remove('hidden');
+                    
+                    void viewEmail.offsetWidth;
+                    
+                    viewEmail.classList.remove('opacity-0');
+                    viewEmail.classList.add('opacity-100');
+                    viewEmail.classList.remove('pointer-events-none');
+                }, 300);
+            });
+
+            // OTP Input Auto-advance logic
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    // Restrict to 1 char
+                    if(e.target.value.length > 1) {
+                        e.target.value = e.target.value.slice(0, 1);
+                    }
+                    // Auto advance
+                    if(e.target.value !== '' && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    // Handle backspace
+                    if(e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                        otpInputs[index - 1].focus();
+                        otpInputs[index - 1].value = ''; // Optional: clear previous on backspace
+                    }
+                });
+                
+                // Allow pasting full code
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text').slice(0, 6).replace(/\D/g, '');
+                    if(pastedData) {
+                        for(let i = 0; i < pastedData.length; i++) {
+                            if(otpInputs[i]) {
+                                otpInputs[i].value = pastedData[i];
+                            }
+                        }
+                        // Focus the next empty input or the last one
+                        const focusIndex = Math.min(pastedData.length, 5);
+                        otpInputs[focusIndex].focus();
+                    }
+                });
+            });
+        });
+    </script>
+</body></html>

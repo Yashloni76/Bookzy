@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Slotpe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#54647a",
+                      "on-primary-fixed": "#00174b",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "surface-container-low": "#eff4ff",
+                      "secondary-fixed": "#d3e4fe",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "surface-bright": "#f8f9ff",
+                      "surface-tint": "#0053db",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c3c6d7",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#515659",
+                      "surface-container-highest": "#d9e3f6",
+                      "on-surface": "#121c2a",
+                      "on-surface-variant": "#434655",
+                      "surface-container-high": "#dee9fc",
+                      "tertiary-fixed": "#dfe3e7",
+                      "on-tertiary-fixed-variant": "#43474b",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#0b1c30",
+                      "surface-dim": "#d0dbed",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#27313f",
+                      "outline": "#737686",
+                      "on-tertiary-fixed": "#171c1f",
+                      "surface-container": "#e6eeff",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#2563eb",
+                      "tertiary-fixed-dim": "#c3c7cb",
+                      "primary": "#004ac6",
+                      "surface": "#f8f9ff",
+                      "secondary": "#505f76",
+                      "tertiary-container": "#696e71",
+                      "on-primary-container": "#eeefff",
+                      "on-background": "#121c2a",
+                      "primary-fixed": "#dbe1ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-variant": "#d9e3f6",
+                      "inverse-primary": "#b4c5ff",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-tertiary-container": "#edf1f5",
+                      "secondary-container": "#d0e1fb",
+                      "background": "#f8f9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "sm": "8px",
+                      "gutter": "24px",
+                      "md": "16px",
+                      "3xl": "64px",
+                      "base": "4px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "2xl": "48px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Geist"],
+                      "headline-md": ["Geist"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Geist"],
+                      "headline-lg-mobile": ["Geist"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #c3c6d7; border-radius: 20px; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex font-body-md antialiased selection:bg-primary-container/30 selection:text-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-40 bg-surface-container-lowest dark:bg-surface-container-low border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-lg py-md h-16 ml-64 hidden md:flex transition-all duration-300">
+<div class="flex items-center">
+<span class="text-headline-md font-headline-md font-extrabold text-on-surface dark:text-inverse-on-surface">Slotpe</span>
+</div>
+<div class="flex items-center gap-md">
+<button aria-label="Notifications" class="text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100 p-sm rounded-full hover:bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+<button aria-label="Help" class="text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100 p-sm rounded-full hover:bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined text-[24px]">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant ml-sm">
+<img alt="Business Owner Avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIPvzAUO-xig7KP_hu_IC9LywTAhzpAvJBYhGctMlJBAqPE4-XjQ-dklX1PZSncngaZSVKgI1Ijova2epBme2NMmAVs3_yH2tG_v-znlGdM96mPZjnUOYhXAsN8WPz1vvvZVUAeTmSEftTm_LZ4Na-5D8ybl1CWQMJHAKIUWC15JlobfK4P4nfFEgQ-8baRbS-rtpxCGNkF3O-AO5qSaVR34cMCLrWURSyy2UNwZfcBqlIlxfF44P8n3KqulDtiQOXIZ0ym2w3kkD3"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full flex flex-col py-lg w-64 border-r border-outline-variant bg-surface dark:bg-surface-dim z-50 hidden md:flex transition-all duration-300">
+<div class="px-lg mb-xl flex flex-col">
+<div class="text-headline-lg font-headline-lg font-bold text-primary dark:text-inverse-primary">Slotpe</div>
+<div class="text-label-sm font-label-sm text-secondary mt-1">Premium SaaS</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar px-sm flex flex-col gap-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">calendar_today</span>
+<span class="text-label-md font-label-md group-hover:text-primary transition-colors">Today</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">event_note</span>
+<span class="text-label-md font-label-md group-hover:text-primary transition-colors">Bookings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">layers</span>
+<span class="text-label-md font-label-md group-hover:text-primary transition-colors">Services</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-primary dark:text-inverse-primary font-bold border-r-4 border-primary dark:border-inverse-primary bg-primary-container/10 scale-[0.98] transition-all duration-150 rounded-l-lg group" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</div>
+<div class="px-sm mt-auto pt-lg border-t border-outline-variant mx-md">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors text-[20px]">share</span>
+<span class="text-label-md font-label-md group-hover:text-primary transition-colors">Share Link</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 pt-16 md:pt-24 pb-3xl md:pb-lg px-md md:px-xl max-w-container-max mx-auto w-full transition-all duration-300">
+<!-- Mobile Header (Visible only on md:hidden) -->
+<div class="md:hidden flex items-center justify-between py-md border-b border-outline-variant mb-md bg-surface-container-lowest sticky top-0 z-30">
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-on-surface">Settings</h1>
+<button class="p-sm text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="hidden md:block mb-xl">
+<h1 class="text-headline-xl font-headline-xl text-on-surface">Settings</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-sm max-w-2xl">Manage your business profile, operating hours, and appearance preferences.</p>
+</div>
+<form class="space-y-lg max-w-4xl pb-2xl">
+<!-- Section 1: Logo & Basic Info Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Logo Upload Card (Glassmorphism inspired, subtle gradient) -->
+<div class="lg:col-span-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col items-center justify-center text-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-low/50 to-transparent pointer-events-none"></div>
+<div class="relative z-10 w-full flex flex-col items-center">
+<h2 class="text-headline-md font-headline-md text-on-surface w-full text-left mb-md self-start">Logo</h2>
+<div class="w-32 h-32 rounded-full border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-secondary hover:border-primary hover:text-primary transition-colors cursor-pointer bg-surface-bright mb-md group-hover:bg-primary-container/5">
+<span class="material-symbols-outlined text-[32px] mb-sm">add_photo_alternate</span>
+<span class="text-label-sm font-label-sm">Upload</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-sm">Recommended: 512x512px, PNG or JPG</p>
+</div>
+</div>
+<!-- Business Profile Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-md pb-sm border-b border-outline-variant">Business Profile</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-base md:col-span-2">
+<label class="block text-body-sm font-body-sm font-bold text-on-surface" for="bizName">Business Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm text-body-md focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/20 transition-all placeholder:text-outline" id="bizName" type="text" value="Slotpe Demo Business"/>
+</div>
+<div class="space-y-base">
+<label class="block text-body-sm font-body-sm font-bold text-on-surface" for="bizCategory">Category</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm text-body-md focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/20 appearance-none transition-all" id="bizCategory">
+<option>Consulting</option>
+<option>Health &amp; Wellness</option>
+<option>Beauty &amp; Salon</option>
+<option>Professional Services</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="space-y-base">
+<label class="block text-body-sm font-body-sm font-bold text-on-surface" for="bizWhatsapp">WhatsApp Number</label>
+<div class="relative flex items-center">
+<span class="absolute left-md text-on-surface-variant text-label-md font-label-md">+91</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-12 pr-md py-sm text-body-md focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/20 transition-all" id="bizWhatsapp" type="tel" value="9876543210"/>
+</div>
+</div>
+<div class="space-y-base md:col-span-2">
+<label class="block text-body-sm font-body-sm font-bold text-on-surface" for="bizDesc">Description (Optional)</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm text-body-md focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/20 transition-all resize-none placeholder:text-outline" id="bizDesc" placeholder="Briefly describe your services..." rows="3"></textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Working Hours List -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center justify-between mb-md pb-sm border-b border-outline-variant">
+<h2 class="text-headline-md font-headline-md text-on-surface">Working Hours</h2>
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-low px-sm py-xs rounded-full">Default Timezone: IST</span>
+</div>
+<div class="space-y-sm">
+<!-- Day Row - Monday -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between p-sm hover:bg-surface-bright rounded-lg border border-transparent hover:border-outline-variant transition-colors group">
+<div class="flex items-center gap-md mb-sm sm:mb-0 w-full sm:w-1/3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="text-body-md font-body-md text-on-surface font-medium w-24">Monday</span>
+</div>
+<div class="flex items-center gap-sm w-full sm:w-auto">
+<input class="bg-surface-container-lowest border border-outline-variant rounded-md px-sm py-xs text-body-sm focus:outline-none focus:border-primary" type="time" value="09:00"/>
+<span class="text-on-surface-variant text-label-sm">-</span>
+<input class="bg-surface-container-lowest border border-outline-variant rounded-md px-sm py-xs text-body-sm focus:outline-none focus:border-primary" type="time" value="18:00"/>
+</div>
+</div>
+<!-- Day Row - Tuesday -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between p-sm hover:bg-surface-bright rounded-lg border border-transparent hover:border-outline-variant transition-colors group">
+<div class="flex items-center gap-md mb-sm sm:mb-0 w-full sm:w-1/3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="text-body-md font-body-md text-on-surface font-medium w-24">Tuesday</span>
+</div>
+<div class="flex items-center gap-sm w-full sm:w-auto">
+<input class="bg-surface-container-lowest border border-outline-variant rounded-md px-sm py-xs text-body-sm focus:outline-none focus:border-primary" type="time" value="09:00"/>
+<span class="text-on-surface-variant text-label-sm">-</span>
+<input class="bg-surface-container-lowest border border-outline-variant rounded-md px-sm py-xs text-body-sm focus:outline-none focus:border-primary" type="time" value="18:00"/>
+</div>
+</div>
+<!-- Day Row - Sunday (Closed) -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between p-sm hover:bg-surface-bright rounded-lg border border-transparent hover:border-outline-variant transition-colors group opacity-60">
+<div class="flex items-center gap-md mb-sm sm:mb-0 w-full sm:w-1/3">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="text-body-md font-body-md text-on-surface font-medium w-24 text-on-surface-variant">Sunday</span>
+</div>
+<div class="flex items-center justify-center sm:justify-start w-full sm:w-auto">
+<span class="text-label-sm font-label-sm text-secondary bg-surface-container-low px-sm py-xs rounded-full inline-block">Closed</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Fixed -->
+<div class="fixed bottom-0 right-0 md:left-64 left-0 bg-surface-container-lowest/90 backdrop-blur-md border-t border-outline-variant p-md flex justify-end z-30">
+<div class="w-full max-w-4xl mx-auto flex justify-end gap-md px-md md:px-0">
+<button class="px-lg py-sm rounded-lg text-primary text-body-md font-body-md font-medium hover:bg-primary-container/10 transition-colors focus:outline-none focus:ring-2 focus:ring-primary" type="button">Cancel</button>
+<button class="px-lg py-sm rounded-lg bg-primary text-on-primary text-body-md font-body-md font-medium hover:bg-primary/90 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center gap-xs" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                        Save Changes
+                    </button>
+</div>
+</div>
+</form>
+</main>
+</body></html>

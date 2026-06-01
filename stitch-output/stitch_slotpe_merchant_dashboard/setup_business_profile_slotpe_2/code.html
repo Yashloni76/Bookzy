@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slotpe - Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "primary": "#004ac6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-primary-fixed": "#00174b",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed-dim": "#c3c7cb",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d0dbed",
+                        "surface-container": "#e6eeff",
+                        "background": "#f8f9ff",
+                        "outline": "#737686",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-variant": "#d9e3f6",
+                        "inverse-surface": "#27313f",
+                        "on-tertiary-fixed": "#171c1f",
+                        "surface-tint": "#0053db",
+                        "outline-variant": "#c3c6d7",
+                        "tertiary-container": "#696e71",
+                        "on-surface": "#121c2a",
+                        "on-surface-variant": "#434655",
+                        "surface-container-high": "#dee9fc",
+                        "on-tertiary-container": "#edf1f5",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-container": "#d0e1fb",
+                        "on-tertiary-fixed-variant": "#43474b",
+                        "on-background": "#121c2a",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-secondary-container": "#54647a",
+                        "secondary": "#505f76",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#dfe3e7",
+                        "error": "#ba1a1a",
+                        "tertiary": "#515659"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "3xl": "64px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "headline-xl": ["Geist"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-geist { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center p-md md:p-xl">
+<main class="w-full max-w-[600px] bg-surface-container-lowest rounded-xl border border-outline-variant p-lg md:p-2xl shadow-sm">
+<!-- Progress Indicator -->
+<div class="mb-2xl">
+<div class="flex justify-between items-center mb-sm">
+<span class="font-label-md text-label-md text-primary">Step 1 of 4</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Business Profile</span>
+</div>
+<div class="flex gap-2">
+<div class="h-2 flex-1 rounded-full bg-primary"></div>
+<div class="h-2 flex-1 rounded-full bg-surface-variant"></div>
+<div class="h-2 flex-1 rounded-full bg-surface-variant"></div>
+<div class="h-2 flex-1 rounded-full bg-surface-variant"></div>
+</div>
+</div>
+<!-- Header -->
+<div class="mb-xl text-center">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-sm">Setup your business</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Let's get started with the basics of your operations.</p>
+</div>
+<!-- Form -->
+<form class="space-y-lg">
+<!-- Business Name -->
+<div>
+<label class="block font-body-sm text-body-sm font-bold text-on-surface mb-xs" for="businessName">Business Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50" id="businessName" placeholder="e.g. Bella Salon" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Category -->
+<div>
+<label class="block font-body-sm text-body-sm font-bold text-on-surface mb-xs" for="category">Category</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-3 pr-xl font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all" id="category">
+<option disabled="" selected="" value="">Select category</option>
+<option value="salon">Salon / Spa</option>
+<option value="tutor">Tutor / Coach</option>
+<option value="clinic">Clinic / Medical</option>
+<option value="consultant">Consultant</option>
+<option value="other">Other</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- City -->
+<div>
+<label class="block font-body-sm text-body-sm font-bold text-on-surface mb-xs" for="city">City</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-xl pr-md py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50" id="city" placeholder="e.g. Mumbai" type="text"/>
+</div>
+</div>
+</div>
+<!-- WhatsApp Number -->
+<div>
+<label class="block font-body-sm text-body-sm font-bold text-on-surface mb-xs" for="whatsapp">WhatsApp Number</label>
+<div class="flex">
+<span class="inline-flex items-center px-md border border-r-0 border-outline-variant bg-surface-container rounded-l-lg font-body-md text-body-md text-on-surface-variant">+91</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-r-lg px-md py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50" id="whatsapp" placeholder="98765 43210" type="tel"/>
+</div>
+</div>
+<!-- Description -->
+<div>
+<div class="flex justify-between items-baseline mb-xs">
+<label class="block font-body-sm text-body-sm font-bold text-on-surface" for="description">Business Description</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Optional</span>
+</div>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all resize-none placeholder:text-on-surface-variant/50" id="description" placeholder="Briefly describe what you do..." rows="3"></textarea>
+</div>
+<!-- Actions -->
+<div class="pt-md mt-xl border-t border-outline-variant flex justify-between items-center">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-md py-sm rounded-lg transition-colors" type="button">
+                    Back
+                </button>
+<button class="bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md px-lg py-3 rounded-lg shadow-sm hover:shadow transition-all flex items-center gap-sm" type="button">
+                    Next: Services
+                    <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+</button>
+</div>
+</form>
+</main>
+</body></html>

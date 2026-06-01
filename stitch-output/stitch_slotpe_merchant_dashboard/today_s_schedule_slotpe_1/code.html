@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - Slotpe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#54647a",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-fixed": "#d3e4fe",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-tint": "#0053db",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c3c6d7",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#515659",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-surface": "#121c2a",
+                        "on-surface-variant": "#434655",
+                        "surface-container-high": "#dee9fc",
+                        "tertiary-fixed": "#dfe3e7",
+                        "on-tertiary-fixed-variant": "#43474b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-dim": "#d0dbed",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#27313f",
+                        "outline": "#737686",
+                        "on-tertiary-fixed": "#171c1f",
+                        "surface-container": "#e6eeff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#2563eb",
+                        "tertiary-fixed-dim": "#c3c7cb",
+                        "primary": "#004ac6",
+                        "surface": "#f8f9ff",
+                        "secondary": "#505f76",
+                        "tertiary-container": "#696e71",
+                        "on-primary-container": "#eeefff",
+                        "on-background": "#121c2a",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d9e3f6",
+                        "inverse-primary": "#b4c5ff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-tertiary-container": "#edf1f5",
+                        "secondary-container": "#d0e1fb",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "3xl": "64px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "2xl": "48px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-64 border-r border-outline-variant bg-surface flex-col py-lg hidden md:flex z-20">
+<div class="px-lg mb-xl">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+</div>
+<h1 class="text-headline-lg font-headline-lg font-bold text-primary">Slotpe</h1>
+</div>
+<p class="text-label-sm font-label-sm text-secondary">Premium SaaS</p>
+</div>
+<ul class="flex flex-col flex-1 px-md gap-xs">
+<!-- Active: Today -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-md text-primary font-bold border-r-4 border-primary bg-primary-container/10 transition-all duration-150 scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-label-md">Today</span>
+</a>
+</li>
+<!-- Inactive -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-md text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="text-label-md font-label-md">Bookings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-md text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="text-label-md font-label-md">Services</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-md text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</li>
+</ul>
+<div class="px-md mt-auto">
+<a class="flex items-center gap-md px-md py-sm rounded-md text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+<span class="text-label-md font-label-md">Share Link</span>
+</a>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-16 border-b border-outline-variant bg-surface-container-lowest flex justify-between items-center px-lg py-md z-10">
+<div class="flex flex-col">
+<h2 class="text-headline-md font-headline-md font-extrabold text-on-surface">Today's Schedule</h2>
+<p class="text-label-sm font-label-sm text-secondary">Monday, Oct 14</p>
+</div>
+<div class="flex items-center gap-md">
+<button class="hidden md:flex items-center gap-xs bg-primary text-on-primary px-md py-sm rounded-lg hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+<span class="text-label-md font-label-md">Block Slot</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-primary transition-opacity rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:text-primary transition-opacity rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant">
+<img alt="Business Owner Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of an Indian small business owner in a modern minimal office setting, wearing a crisp blue shirt, smiling subtly. High-key lighting, soft white background, instilling a sense of calm competence and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHMxUepAaU6fFtYRvTGvvXq-ZyYWMwmDha_wKS1dNJmdhvJcFCPzXmlIW993Mh3Pnki_lraYymduJokZjjr4OZjxJfhvsh1_tgUlcsDfyKNfs4Ll0JXDYuIVuEhZGQyaeJ-HUES2WAF9sJh6AJ1WhpXccUbllw51GcRhHJmmqqy3Caj6F_YxPRBQCtcyuBy2mCgQOsWqAGFqO2Vorf-BGpFAnN31drcxZdNAg-3OejAkx9_1IUzB1vfgR3j2B5pSzhErszzoDpYc-H"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 md:ml-64 p-md md:p-xl min-h-screen">
+<!-- Stats Row -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md mb-xl">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col justify-between">
+<span class="text-label-md font-label-md text-secondary mb-sm">Total Bookings</span>
+<span class="text-headline-lg font-headline-lg text-on-surface font-bold">12</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col justify-between">
+<span class="text-label-md font-label-md text-secondary mb-sm">Completed</span>
+<span class="text-headline-lg font-headline-lg text-primary font-bold">5</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col justify-between">
+<span class="text-label-md font-label-md text-secondary mb-sm">Upcoming</span>
+<span class="text-headline-lg font-headline-lg text-on-surface font-bold">6</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col justify-between">
+<span class="text-label-md font-label-md text-secondary mb-sm">No-shows</span>
+<span class="text-headline-lg font-headline-lg text-error font-bold">1</span>
+</div>
+</div>
+<!-- Bookings List -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<!-- Header Row (Desktop) -->
+<div class="hidden md:flex px-md py-sm bg-surface-container-low border-b border-outline-variant text-label-sm font-label-sm text-secondary">
+<div class="w-48">Time</div>
+<div class="flex-1">Customer Details</div>
+<div class="w-32">Status</div>
+<div class="w-24 text-right">Actions</div>
+</div>
+<!-- List Items -->
+<div class="flex flex-col">
+<!-- Row 1 -->
+<div class="flex flex-col md:flex-row items-start md:items-center px-md py-lg border-b border-outline-variant last:border-b-0 hover:bg-surface-bright transition-colors gap-md md:gap-0">
+<div class="w-full md:w-48 flex items-center gap-sm text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span class="text-label-md font-label-md font-bold">10:30 AM - 11:15 AM</span>
+</div>
+<div class="flex-1 flex items-start gap-md w-full">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-label-md">
+                            RS
+                        </div>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface">Rahul Sharma</span>
+<span class="text-body-sm font-body-sm text-secondary mb-xs">Men's Haircut</span>
+<div class="flex items-center gap-xs text-body-sm font-body-sm text-secondary">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="chat">chat</span>
+<span>+91 98765 43210</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-32 flex items-center justify-start md:justify-start mt-sm md:mt-0">
+<span class="inline-flex items-center px-2 py-1 rounded bg-primary-container text-on-primary-container text-label-sm font-label-sm">
+                            Confirmed
+                        </span>
+</div>
+<div class="w-full md:w-24 flex items-center justify-end gap-sm mt-md md:mt-0 border-t md:border-t-0 border-outline-variant pt-md md:pt-0">
+<button class="text-primary hover:bg-primary-container/20 p-sm rounded-full transition-colors" title="Mark Complete">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</button>
+<button class="text-secondary hover:text-error hover:bg-error-container/20 p-sm rounded-full transition-colors" title="Mark No-show">
+<span class="material-symbols-outlined" data-icon="block">block</span>
+</button>
+<button class="text-secondary hover:text-primary hover:bg-primary-container/20 p-sm rounded-full transition-colors" title="Contact">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Row 2 (Completed Example) -->
+<div class="flex flex-col md:flex-row items-start md:items-center px-md py-lg border-b border-outline-variant last:border-b-0 hover:bg-surface-bright transition-colors gap-md md:gap-0 opacity-70">
+<div class="w-full md:w-48 flex items-center gap-sm text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+<span class="text-label-md font-label-md">09:00 AM - 10:00 AM</span>
+</div>
+<div class="flex-1 flex items-start gap-md w-full">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center font-bold text-label-md">
+                            AK
+                        </div>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface line-through">Amit Kumar</span>
+<span class="text-body-sm font-body-sm text-secondary">Beard Trim</span>
+</div>
+</div>
+<div class="w-full md:w-32 flex items-center justify-start md:justify-start mt-sm md:mt-0">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high text-secondary text-label-sm font-label-sm">
+                            Completed
+                        </span>
+</div>
+<div class="w-full md:w-24 flex items-center justify-end gap-sm mt-md md:mt-0">
+<!-- Actions disabled/hidden for completed -->
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile FAB -->
+<button class="md:hidden fixed bottom-md right-md bg-primary text-on-primary p-md rounded-full shadow-lg flex items-center justify-center z-50">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</body></html>
