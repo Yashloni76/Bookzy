@@ -1,70 +1,31 @@
-import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
-  try {
-    let response = NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
-    });
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  // Check for Supabase auth cookies (they follow the pattern sb-<ref>-auth-token)
+  const hasAuthCookie = request.cookies.getAll().some(
+    (cookie) => cookie.name.startsWith("sb-") && cookie.name.endsWith("-auth-token")
+  );
 
-    if (!supabaseUrl || !supabaseAnonKey) {
-      return response;
-    }
+  // Protect /dashboard and /onboarding — redirect to /login if no session
+  const isProtectedRoute =
+    pathname.startsWith("/dashboard") || pathname.startsWith("/onboarding");
 
-    const supabase = createServerClient(
-      supabaseUrl,
-      supabaseAnonKey,
-      {
-        cookies: {
-          getAll() {
-            return request.cookies.getAll();
-          },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value }) => 
-              request.cookies.set(name, value)
-            );
-            response = NextResponse.next({
-              request,
-            });
-            cookiesToSet.forEach(({ name, value, options }) =>
-              response.cookies.set(name, value, options)
-            );
-          },
-        },
-      }
-    );
-
-    const { data: { user } } = await supabase.auth.getUser();
-
-    const pathname = request.nextUrl.pathname;
-
-    // Protect /dashboard and /onboarding
-    const isProtectedRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/onboarding");
-    
-    if (isProtectedRoute && !user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      return NextResponse.redirect(url);
-    }
-
-    // Redirect authenticated users away from /login
-    if (pathname === "/login" && user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/dashboard";
-      return NextResponse.redirect(url);
-    }
-
-    return response;
-  } catch (error) {
-    // If anything fails in the edge runtime, log it and let the request continue
-    console.error("Middleware crash:", error);
-    return NextResponse.next();
+  if (isProtectedRoute && !hasAuthCookie) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    return NextResponse.redirect(url);
   }
+
+  // Redirect authenticated users away from /login
+  if (pathname === "/login" && hasAuthCookie) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/dashboard";
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
