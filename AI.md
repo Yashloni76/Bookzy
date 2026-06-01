@@ -194,7 +194,7 @@ Planned/current:
 - Supabase PostgreSQL
 - Supabase Row Level Security
 - Supabase Storage later for logos
-- Resend for emails
+- Nodemailer (Gmail SMTP) for emails
 - Vercel deployment later
 
 Current package notes:
@@ -236,9 +236,10 @@ Expected variables:
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-RESEND_API_KEY=
 WATI_API_KEY=
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+EMAIL_USER=your_gmail@gmail.com
+EMAIL_PASS=your_16_char_app_password
 ```
 
 Current state:
@@ -246,7 +247,7 @@ Current state:
 - Supabase URL is set.
 - Supabase public/publishable key is set.
 - Supabase service role key is set.
-- Resend API key is set.
+- Resend was replaced with Nodemailer. `EMAIL_USER` and `EMAIL_PASS` (Gmail App Password) are required for transactional emails.
 - `WATI_API_KEY` intentionally remains blank because WhatsApp automation is deferred.
 
 Security note:
@@ -561,6 +562,12 @@ To prevent database-level select discrepancies and ensure high performance durin
 - `app/(dashboard)/dashboard/services/page.tsx`: queries business and bookable services via Admin client.
 - `app/(dashboard)/dashboard/settings/page.tsx`: queries business and weekly operating hours via Admin client.
 
+### Fixes: Dashboard Caching & Timezones
+
+- Fixed Next.js aggressive caching for dashboard routes (`export const fetchCache = "force-no-store"`).
+- Global API revalidation using `revalidatePath("/dashboard", "layout")` for immediate UI sync.
+- Fixed UTC to IST conversion (`Asia/Kolkata`) issues when filtering "Today's Schedule".
+
 ---
 
 ## Current Verification State
@@ -603,10 +610,12 @@ Recent cleanups:
 - The developer bypass button has been completely removed from the login form.
 - A functional Sign Out button was added to the owner sidebar.
 - Route protection is strictly enforced in the Next.js middleware (protecting `/dashboard` and `/onboarding` while keeping `/login`, `/[slug]`, `/booking`, and `/api/public` explicitly public).
+- **Migration:** Replaced Resend with Nodemailer (Gmail SMTP App Password) to allow free email delivery without domain restrictions.
 
-The immediate next technical focus is:
-1. Build the **Landing Page** (Root `/` page) to explain the SaaS.
-2. Prepare for **Vercel deployment**.
+The immediate next technical focus based on the Production Readiness Audit:
+1. **Implement API Rate Limiting** on the public booking route (`/api/public/[slug]/book/route.ts`) to prevent spam.
+2. Refactor Admin Client usages back to Server Client to leverage Supabase RLS.
+3. Prepare for Vercel deployment and potentially write tests for `rangesOverlap`.
 
 ---
 
@@ -652,8 +661,7 @@ npm.cmd test
 - Do not expose the service role key.
 - Do not build WhatsApp automation now (deferred).
 - Do not build payments now (deferred).
-- Owner onboarding, dashboard shell, services list, and business settings are completed. Focus next on the **customer booking flow** and dynamic slots availability.
 
 ## Last Updated
 
-2026-06-01
+2026-06-02
