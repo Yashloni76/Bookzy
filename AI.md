@@ -533,7 +533,7 @@ lib/env.ts
 lib/supabase/client.ts
 lib/supabase/server.ts
 lib/supabase/admin.ts
-lib/supabase/middleware.ts
+lib/supabase/session.ts
 middleware.ts
 ```
 
@@ -543,7 +543,7 @@ Purpose:
 - `client.ts`: browser Supabase client.
 - `server.ts`: server Supabase client using cookies.
 - `admin.ts`: service-role Supabase client for backend-only operations.
-- `middleware.ts`: refresh Supabase auth session.
+- `session.ts`: refresh Supabase auth session.
 - root `middleware.ts`: applies session middleware.
 
 ### Unified Auth Callback Route
