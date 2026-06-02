@@ -24,7 +24,11 @@ export const publicEnv = {
     "NEXT_PUBLIC_SUPABASE_ANON_KEY",
     requiredPublicEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   ),
-  appUrl: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
+  get appUrl() {
+    if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL;
+    if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+    return "http://localhost:3000";
+  },
 };
 
 export function getServiceRoleKey() {

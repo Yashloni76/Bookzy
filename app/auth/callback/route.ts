@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { publicEnv } from "@/lib/env";
 
 export async function GET(request: NextRequest) {
@@ -75,6 +76,7 @@ export async function GET(request: NextRequest) {
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
+    console.error("Exchange code for session error:", error);
     return NextResponse.redirect(`${publicEnv.appUrl}/login?error=auth_callback`);
   }
 
@@ -86,7 +88,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${publicEnv.appUrl}/login?error=no_user`);
   }
 
-  const { data: business } = await supabase
+  // Use Admin client for businesses query to bypass RLS issues during callback
+  const adminClient = createSupabaseAdminClient();
+  const { data: business } = await adminClient
     .from("businesses")
     .select("id")
     .eq("owner_id", user.id)
@@ -121,8 +125,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: error?.message || "User not found" }, { status: 401 });
     }
 
-    // Check if business exists for the owner
-    const { data: business } = await supabase
+    // Check if business exists for the owner using Admin Client to bypass RLS issues
+    const adminClient = createSupabaseAdminClient();
+    const { data: business } = await adminClient
       .from("businesses")
       .select("id")
       .eq("owner_id", user.id)
