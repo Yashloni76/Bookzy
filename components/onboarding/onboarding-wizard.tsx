@@ -11,12 +11,15 @@ export type OnboardingData = {
   businessSlug: string | null;
 };
 
-export function OnboardingWizard() {
-  const [step, setStep] = useState(1);
-  const [data, setData] = useState<OnboardingData>({
-    businessId: null,
-    businessSlug: null,
-  });
+export function OnboardingWizard({
+  initialStep = 1,
+  initialData = { businessId: null, businessSlug: null }
+}: {
+  initialStep?: number,
+  initialData?: OnboardingData
+}) {
+  const [step, setStep] = useState(initialStep);
+  const [data, setData] = useState<OnboardingData>(initialData);
 
   const nextStep = () => setStep((s) => s + 1);
 

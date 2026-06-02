@@ -26,7 +26,24 @@ export default async function DashboardLayout({
     .eq("owner_id", user.id)
     .maybeSingle();
 
-  if (!business) {
+  let isFullyOnboarded = false;
+  if (business) {
+    const { count: servicesCount } = await adminClient
+      .from("services")
+      .select("*", { count: "exact", head: true })
+      .eq("business_id", business.id);
+
+    const { count: hoursCount } = await adminClient
+      .from("business_hours")
+      .select("*", { count: "exact", head: true })
+      .eq("business_id", business.id);
+
+    if (servicesCount && servicesCount > 0 && hoursCount && hoursCount > 0) {
+      isFullyOnboarded = true;
+    }
+  }
+
+  if (!isFullyOnboarded) {
     redirect("/onboarding");
   }
 

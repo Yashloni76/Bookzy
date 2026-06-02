@@ -96,12 +96,29 @@ export async function GET(request: NextRequest) {
     .eq("owner_id", user.id)
     .maybeSingle();
 
+  let isFullyOnboarded = false;
+  if (business) {
+    const { count: servicesCount } = await adminClient
+      .from("services")
+      .select("*", { count: "exact", head: true })
+      .eq("business_id", business.id);
+
+    const { count: hoursCount } = await adminClient
+      .from("business_hours")
+      .select("*", { count: "exact", head: true })
+      .eq("business_id", business.id);
+
+    if (servicesCount && servicesCount > 0 && hoursCount && hoursCount > 0) {
+      isFullyOnboarded = true;
+    }
+  }
+
   if (next?.startsWith("/")) {
     return NextResponse.redirect(`${publicEnv.appUrl}${next}`);
   }
 
   return NextResponse.redirect(
-    business ? `${publicEnv.appUrl}/dashboard` : `${publicEnv.appUrl}/onboarding`,
+    isFullyOnboarded ? `${publicEnv.appUrl}/dashboard` : `${publicEnv.appUrl}/onboarding`,
   );
 }
 
@@ -133,9 +150,26 @@ export async function POST(request: NextRequest) {
       .eq("owner_id", user.id)
       .maybeSingle();
 
+    let isFullyOnboarded = false;
+    if (business) {
+      const { count: servicesCount } = await adminClient
+        .from("services")
+        .select("*", { count: "exact", head: true })
+        .eq("business_id", business.id);
+
+      const { count: hoursCount } = await adminClient
+        .from("business_hours")
+        .select("*", { count: "exact", head: true })
+        .eq("business_id", business.id);
+
+      if (servicesCount && servicesCount > 0 && hoursCount && hoursCount > 0) {
+        isFullyOnboarded = true;
+      }
+    }
+
     return NextResponse.json({
       success: true,
-      redirect: business ? "/dashboard" : "/onboarding",
+      redirect: isFullyOnboarded ? "/dashboard" : "/onboarding",
     });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });

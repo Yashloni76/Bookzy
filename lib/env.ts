@@ -25,9 +25,8 @@ export const publicEnv = {
     requiredPublicEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   ),
   get appUrl() {
-    if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL;
-    if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-    return "http://localhost:3000";
+    let url = process.env.NEXT_PUBLIC_APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+    return url.replace(/\/+$/, "");
   },
 };
 
