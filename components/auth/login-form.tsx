@@ -18,10 +18,12 @@ export function LoginForm() {
     setMessage("");
 
     const supabase = createSupabaseBrowserClient();
+    const appUrl = publicEnv.appUrl.replace(/\/$/, "");
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${publicEnv.appUrl}/auth/callback`,
+        emailRedirectTo: `${appUrl}/auth/callback`,
+        shouldCreateUser: true,
       },
     });
 
