@@ -610,10 +610,41 @@ Recent cleanups:
 - Route protection is strictly enforced in the Next.js middleware (protecting `/dashboard` and `/onboarding` while keeping `/login`, `/[slug]`, `/booking`, and `/api/public` explicitly public).
 - **Migration:** Replaced Resend with Nodemailer (Gmail SMTP App Password) to allow free email delivery without domain restrictions.
 
+### Vercel Deployment: Middleware Edge Runtime Fix (Critical)
+
+**Problem:** After deploying to Vercel, the site returned `500: INTERNAL_SERVER_ERROR` with code `MIDDLEWARE_INVOCATION_FAILED` on every single page load.
+
+**Root cause:** Next.js compiles the root `middleware.ts` into a special **Edge Function** that runs on Vercel's Edge Network. The Edge Runtime is a lightweight V8 sandbox (similar to Cloudflare Workers) — it is **NOT** full Node.js. It only supports standard Web APIs.
+
+Our middleware was importing `createServerClient` from `@supabase/ssr`. This package internally uses Node.js-specific APIs (like certain `crypto` polyfills and module resolution patterns) that are not available in the Edge Runtime. The import itself was failing at the **compilation/bundling stage** — before any of our application code could even execute. This is why:
+
+- Renaming `lib/supabase/middleware.ts` to `lib/supabase/session.ts` did NOT fix it (the import of `@supabase/ssr` was still there).
+- Wrapping the middleware body in `try/catch` did NOT fix it (the crash happened during `import`, not during execution).
+- Adding environment variable guards did NOT fix it (the module failed to load before any runtime code ran).
+
+**Fix:** Completely removed `@supabase/ssr` from `middleware.ts`. The middleware now uses **zero external dependencies** — only Next.js built-in `NextResponse` and `NextRequest`. It checks for authentication by scanning for Supabase session cookies directly (cookies starting with `sb-` and ending with `-auth-token`). This is a lightweight string check that is fully Edge-compatible.
+
+**Important rule for future AI:** NEVER import `@supabase/ssr`, `@supabase/supabase-js`, `nodemailer`, or any Node.js-dependent library in the root `middleware.ts` file. The middleware runs in Vercel's Edge Runtime, which only supports Web APIs. All Supabase client usage must happen in Server Components, Route Handlers, or Server Actions — never in middleware.
+
+The old `lib/supabase/middleware.ts` (later renamed `session.ts`) has been deleted. Session refresh is now handled by the Supabase client in `lib/supabase/server.ts` inside Server Components and Route Handlers.
+
+### Deployment Status
+
+- **GitHub:** `https://github.com/Yashloni76/Bookzy.git` (branch: `main`)
+- **Vercel:** Deployed and building successfully.
+- **Environment Variables:** Must be configured in Vercel Dashboard → Settings → Environment Variables:
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+  - `SUPABASE_SERVICE_ROLE_KEY`
+  - `NEXT_PUBLIC_APP_URL` (set to the live Vercel domain, e.g., `https://bookzy.vercel.app`)
+  - `EMAIL_USER`
+  - `EMAIL_PASS`
+- **Supabase Auth Redirect URLs:** Must be updated in Supabase Dashboard → Authentication → URL Configuration to include the Vercel production URL in addition to `localhost:3000`.
+
 The immediate next technical focus based on the Production Readiness Audit:
 1. **Implement API Rate Limiting** on the public booking route (`/api/public/[slug]/book/route.ts`) to prevent spam.
 2. Refactor Admin Client usages back to Server Client to leverage Supabase RLS.
-3. Prepare for Vercel deployment and potentially write tests for `rangesOverlap`.
+3. Make dashboard responsive for mobile and tablet devices.
 
 ---
 
@@ -659,6 +690,7 @@ npm.cmd test
 - Do not expose the service role key.
 - Do not build WhatsApp automation now (deferred).
 - Do not build payments now (deferred).
+- **NEVER import `@supabase/ssr`, `@supabase/supabase-js`, `nodemailer`, or any Node.js library in `middleware.ts`.** It runs in Vercel Edge Runtime which only supports Web APIs.
 
 ## Last Updated
 
