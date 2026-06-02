@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
   
   const hasCookie = request.cookies.getAll()
     .some(c => c.name.startsWith('sb-') && 
-               c.name.endsWith('-auth-token'))
+               c.name.includes('-auth-token'))
   
   const isProtected = PROTECTED.some(p => 
     pathname.startsWith(p))
