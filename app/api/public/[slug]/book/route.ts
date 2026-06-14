@@ -5,6 +5,7 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import { publicEnv } from "@/lib/env";
 import { revalidatePath } from "next/cache";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -19,12 +20,48 @@ export async function POST(
   { params }: { params: { slug: string } }
 ) {
   try {
+    // --- Rate limiting ---
+    const forwarded = request.headers.get("x-forwarded-for");
+    const ip = forwarded ? forwarded.split(",")[0].trim() : "unknown";
+    const { allowed } = checkRateLimit(ip, 5, 10 * 60 * 1000);
+    if (!allowed) {
+      return NextResponse.json(
+        { error: "Too many booking attempts. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const { service_id, date, start_time, customer_name, customer_whatsapp, customer_email, notes } = body;
 
     if (!service_id || !date || !start_time || !customer_name || !customer_whatsapp) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
+
+    // --- Input validation ---
+    const trimmedName = String(customer_name).trim();
+    if (trimmedName.length < 2 || trimmedName.length > 100) {
+      return NextResponse.json({ error: "Name must be between 2 and 100 characters" }, { status: 400 });
+    }
+
+    if (!/^[6-9]\d{9}$/.test(String(customer_whatsapp))) {
+      return NextResponse.json({ error: "Invalid phone number. Enter a 10-digit Indian mobile number starting with 6-9" }, { status: 400 });
+    }
+
+    if (customer_email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(customer_email))) {
+      return NextResponse.json({ error: "Invalid email address format" }, { status: 400 });
+    }
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(date))) {
+      return NextResponse.json({ error: "Invalid date format. Use YYYY-MM-DD" }, { status: 400 });
+    }
+
+    const today = new Date().toISOString().split("T")[0];
+    if (date < today) {
+      return NextResponse.json({ error: "Cannot book a date in the past" }, { status: 400 });
+    }
+
+    const trimmedNotes = notes ? String(notes).trim().slice(0, 500) : null;
 
     const adminClient = createSupabaseAdminClient();
 
@@ -109,7 +146,7 @@ export async function POST(
         .from("customers")
         .insert({
           business_id: business.id,
-          name: customer_name,
+          name: trimmedName,
           whatsapp_number: customer_whatsapp,
           email: customer_email || null,
         })
@@ -130,14 +167,14 @@ export async function POST(
         business_id: business.id,
         service_id: service.id,
         customer_id,
-        customer_name,
+        customer_name: trimmedName,
         customer_whatsapp,
         customer_email: customer_email || null,
         appointment_date: date,
         start_time,
         end_time,
         status: "confirmed",
-        notes: notes || null,
+        notes: trimmedNotes,
         cancel_token,
       })
       .select("id")
