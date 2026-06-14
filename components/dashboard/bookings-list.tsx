@@ -13,6 +13,7 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
   const [activeTab, setActiveTab] = useState("all");
   const [selectedBooking, setSelectedBooking] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const today = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
@@ -29,6 +30,7 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
 
   const updateStatus = async (bookingId: string, status: string) => {
     setIsLoading(true);
+    setError("");
     try {
       const res = await fetch(`/api/dashboard/bookings/${bookingId}`, {
         method: "PATCH",
@@ -42,10 +44,10 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
         router.refresh();
       } else {
         const data = await res.json();
-        alert(data.error || "Failed to update status");
+        setError(data.error || "Failed to update status");
       }
     } catch (err) {
-      alert("An error occurred");
+      setError("An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -156,7 +158,7 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
           >
             <div className="p-6 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white z-10">
               <h2 className="text-xl font-semibold text-slate-900">Booking Details</h2>
-              <Button variant="ghost" className="h-8 px-2" onClick={() => setSelectedBooking(null)}>
+              <Button variant="ghost" className="h-8 px-2" onClick={() => { setSelectedBooking(null); setError(""); }} aria-label="Close details">
                 <XCircle className="w-5 h-5 text-slate-400" />
               </Button>
             </div>
@@ -233,7 +235,7 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
                   >
                     <UserX className="w-4 h-4 mr-2" /> Mark as No Show
                   </Button>
-                  <Button 
+                    <Button 
                     variant="ghost"
                     className="w-full text-slate-500"
                     onClick={() => updateStatus(selectedBooking.id, "cancelled")}
@@ -241,6 +243,7 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
                   >
                     Cancel Booking
                   </Button>
+                  {error && <p className="text-sm text-red-600 text-center mt-2">{error}</p>}
                 </div>
               )}
             </div>

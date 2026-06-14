@@ -32,6 +32,7 @@ export function PublicBookingClient({
   
   const [isFetchingSlots, setIsFetchingSlots] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
   
   const router = useRouter();
 
@@ -89,6 +90,7 @@ export function PublicBookingClient({
     if (!selectedService || !selectedTime) return;
 
     setIsSubmitting(true);
+    setError("");
     const formData = new FormData(e.currentTarget);
     const payload = {
       service_id: selectedService.id,
@@ -110,10 +112,10 @@ export function PublicBookingClient({
         setStep("success");
       } else {
         const data = await res.json();
-        alert(data.error || "Booking failed");
+        setError(data.error || "Booking failed");
       }
     } catch (err) {
-      alert("An error occurred");
+      setError("An error occurred");
     } finally {
       setIsSubmitting(false);
     }
@@ -270,6 +272,12 @@ export function PublicBookingClient({
               <Label htmlFor="notes">Any notes for the business? (Optional)</Label>
               <Input id="notes" name="notes" placeholder="E.g., I have a specific request..." />
             </div>
+
+            {error && (
+              <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                {error}
+              </p>
+            )}
 
             <Button type="submit" className="w-full h-12 text-lg mt-6" disabled={isSubmitting}>
               {isSubmitting ? "Confirming..." : "Confirm Booking"}

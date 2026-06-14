@@ -7,6 +7,7 @@ import { CheckCircle2, UserX } from "lucide-react";
 
 export function BookingActions({ bookingId, currentStatus }: { bookingId: string, currentStatus: string }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   if (currentStatus !== "confirmed") {
@@ -15,6 +16,7 @@ export function BookingActions({ bookingId, currentStatus }: { bookingId: string
 
   const updateStatus = async (status: string) => {
     setIsLoading(true);
+    setError("");
     try {
       const res = await fetch(`/api/dashboard/bookings/${bookingId}`, {
         method: "PATCH",
@@ -25,10 +27,12 @@ export function BookingActions({ bookingId, currentStatus }: { bookingId: string
         router.refresh();
       } else {
         const data = await res.json();
-        alert(data.error || "Failed to update status");
+        setError(data.error || "Failed to update status");
+        setTimeout(() => setError(""), 3000);
       }
     } catch (err) {
-      alert("An error occurred");
+      setError("An error occurred");
+      setTimeout(() => setError(""), 3000);
     } finally {
       setIsLoading(false);
     }
@@ -54,6 +58,11 @@ export function BookingActions({ bookingId, currentStatus }: { bookingId: string
         <UserX className="w-4 h-4 mr-1" />
         No Show
       </Button>
+      {error && (
+        <div className="absolute mt-10 text-xs text-red-600 font-medium bg-red-50 border border-red-100 rounded px-2 py-1 shadow-sm whitespace-nowrap z-10">
+          {error}
+        </div>
+      )}
     </div>
   );
 }

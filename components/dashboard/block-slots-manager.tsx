@@ -11,11 +11,15 @@ import { useRouter } from "next/navigation";
 
 export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots: any[] }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [deleteError, setDeleteError] = useState("");
   const router = useRouter();
 
   const handleBlockSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
+    setDeleteError("");
 
     const formData = new FormData(e.currentTarget);
     const start_time = formData.get("start_time") as string;
@@ -29,7 +33,7 @@ export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots
     };
 
     if (start_time >= end_time) {
-      alert("End time must be after start time");
+      setError("End time must be after start time");
       setIsLoading(false);
       return;
     }
@@ -45,10 +49,10 @@ export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots
         router.refresh();
       } else {
         const data = await res.json();
-        alert(data.error || "Failed to block slot");
+        setError(data.error || "Failed to block slot");
       }
     } catch (err) {
-      alert("An error occurred");
+      setError("An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -56,6 +60,7 @@ export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to remove this block?")) return;
+    setDeleteError("");
     
     try {
       const res = await fetch(`/api/dashboard/block`, {
@@ -67,10 +72,10 @@ export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots
         router.refresh();
       } else {
         const data = await res.json();
-        alert(data.error || "Failed to remove blocked slot");
+        setDeleteError(data.error || "Failed to remove blocked slot");
       }
     } catch (err) {
-      alert("An error occurred");
+      setDeleteError("An error occurred");
     }
   };
 
@@ -109,6 +114,7 @@ export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots
               <Label htmlFor="reason">Reason (Optional)</Label>
               <Input type="text" id="reason" name="reason" placeholder="e.g., Lunch break, Maintenance" />
             </div>
+            {error && <p className="text-sm text-red-600">{error}</p>}
             <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? "Blocking..." : "Block Slot"}
             </Button>
@@ -122,6 +128,7 @@ export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots
           <CardDescription>Your currently blocked time periods.</CardDescription>
         </CardHeader>
         <CardContent>
+          {deleteError && <p className="text-sm text-red-600 mb-4">{deleteError}</p>}
           {initialBlockedSlots.length === 0 ? (
             <div className="flex flex-col items-center justify-center p-8 text-center text-slate-500">
               <CalendarX2 className="w-8 h-8 mb-2 text-slate-300" />
@@ -144,6 +151,7 @@ export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots
                     variant="ghost" 
                     className="text-red-500 hover:bg-red-50 hover:text-red-600 px-2"
                     onClick={() => handleDelete(block.id)}
+                    aria-label="Delete blocked slot"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>

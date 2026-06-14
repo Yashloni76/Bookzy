@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Edit2, Power } from "lucide-react";
+import { Plus, Edit2, Power, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,6 +25,7 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [togglingId, setTogglingId] = useState<string | null>(null);
   const [error, setError] = useState("");
 
   const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,7 +69,12 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
   };
 
   const toggleStatus = async (id: string, currentStatus: boolean) => {
-    await toggleServiceStatusAction(id, !currentStatus);
+    setTogglingId(id);
+    try {
+      await toggleServiceStatusAction(id, !currentStatus);
+    } finally {
+      setTogglingId(null);
+    }
   };
 
 
@@ -128,13 +134,19 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
                           className="h-8 w-8 p-0 text-slate-400 hover:text-blue-700"
                           onClick={() => toggleStatus(service.id, service.is_active)}
                           title={service.is_active ? "Deactivate" : "Activate"}
+                          disabled={togglingId === service.id}
                         >
-                          <Power className="h-4 w-4" />
+                          {togglingId === service.id ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Power className="h-4 w-4" />
+                          )}
                         </Button>
                         <Button 
                           variant="ghost" 
                           className="h-8 w-8 p-0 text-slate-400 hover:text-blue-700"
                           onClick={() => openEdit(service)}
+                          aria-label="Edit service"
                         >
                           <Edit2 className="h-4 w-4" />
                         </Button>

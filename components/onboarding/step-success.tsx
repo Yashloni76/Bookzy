@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { CheckCircle2, Copy, ExternalLink } from "lucide-react";
@@ -7,11 +8,13 @@ import Link from "next/link";
 import { publicEnv } from "@/lib/env";
 
 export function StepSuccess({ businessSlug }: { businessSlug: string }) {
+  const [copied, setCopied] = useState(false);
   const link = `${publicEnv.appUrl}/${businessSlug}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link);
-    alert("Link copied to clipboard!");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -30,8 +33,9 @@ export function StepSuccess({ businessSlug }: { businessSlug: string }) {
           <span className="text-slate-900 font-medium truncate flex-1 text-left">
             {link}
           </span>
-          <Button variant="secondary" onClick={copyToClipboard} className="shrink-0 gap-2">
-            <Copy className="h-4 w-4" /> Copy
+          <Button variant="secondary" onClick={copyToClipboard} className="shrink-0 gap-2 w-24">
+            {copied ? <CheckCircle2 className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+            {copied ? "Copied!" : "Copy"}
           </Button>
         </div>
 

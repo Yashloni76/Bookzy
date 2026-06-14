@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 export function CancelBookingClient({ booking, token }: { booking: any, token: string }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isCancelled, setIsCancelled] = useState(booking.status === "cancelled");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const businessName = booking.businesses?.business_name || "the business";
@@ -18,6 +19,7 @@ export function CancelBookingClient({ booking, token }: { booking: any, token: s
 
   const handleCancel = async () => {
     setIsLoading(true);
+    setError("");
     try {
       const res = await fetch(`/api/public/booking/${booking.id}/cancel`, {
         method: "POST",
@@ -29,10 +31,10 @@ export function CancelBookingClient({ booking, token }: { booking: any, token: s
         router.refresh();
       } else {
         const data = await res.json();
-        alert(data.error || "Failed to cancel booking");
+        setError(data.error || "Failed to cancel booking");
       }
     } catch (err) {
-      alert("An error occurred");
+      setError("An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -93,6 +95,12 @@ export function CancelBookingClient({ booking, token }: { booking: any, token: s
           <span className="font-medium text-sm">{formatTime(booking.start_time)}</span>
         </div>
       </div>
+
+      {error && (
+        <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 mb-6">
+          {error}
+        </p>
+      )}
 
       <div className="space-y-3">
         <Button 
