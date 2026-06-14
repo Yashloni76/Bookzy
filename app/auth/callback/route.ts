@@ -79,7 +79,9 @@ export async function GET(request: NextRequest) {
 
   if (error) {
     console.error("Exchange code for session error:", error);
-    return NextResponse.redirect(`${publicEnv.appUrl}/login?error=auth_callback`);
+    // Pass the specific error code to the login page to show helpful messages
+    const errCode = (error as any).code || "auth_callback";
+    return NextResponse.redirect(`${publicEnv.appUrl}/login?error=${errCode}`);
   }
 
   const user = data.user;

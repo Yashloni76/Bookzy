@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, CalendarCheck, Loader2, Mail, ShieldCheck } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { publicEnv } from "@/lib/env";
@@ -8,9 +9,27 @@ import { publicEnv } from "@/lib/env";
 type FormStatus = "idle" | "loading" | "sent" | "error";
 
 export function LoginForm() {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const errorParam = searchParams?.get("error");
+    if (errorParam) {
+      setStatus("error");
+      if (
+        errorParam === "pkce_code_verifier_not_found" ||
+        errorParam === "flow_state_not_found"
+      ) {
+        setMessage(
+          "Security error: Please open the login link on the exact same device and browser you used to request it."
+        );
+      } else {
+        setMessage("Login failed or link expired. Please try again.");
+      }
+    }
+  }, [searchParams]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
