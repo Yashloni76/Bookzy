@@ -72,54 +72,39 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  console.error('1. Code received:', code);
   const supabase = createSupabaseServerClient();
-  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+  console.error('2. Exchange result:', { data, error });
 
   if (error) {
     console.error("Exchange code for session error:", error);
     return NextResponse.redirect(`${publicEnv.appUrl}/login?error=auth_callback`);
   }
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  const user = data.user;
   if (!user) {
     return NextResponse.redirect(`${publicEnv.appUrl}/login?error=no_user`);
   }
 
   // Use Admin client for businesses query to bypass RLS issues during callback
   const adminClient = createSupabaseAdminClient();
-  const { data: business } = await adminClient
+  const { data: business, error: bizError } = await adminClient
     .from("businesses")
     .select("id")
     .eq("owner_id", user.id)
     .maybeSingle();
 
-  let isFullyOnboarded = false;
-  if (business) {
-    const { count: servicesCount } = await adminClient
-      .from("services")
-      .select("*", { count: "exact", head: true })
-      .eq("business_id", business.id);
+  console.error('3. Business lookup:', { business, bizError });
 
-    const { count: hoursCount } = await adminClient
-      .from("business_hours")
-      .select("*", { count: "exact", head: true })
-      .eq("business_id", business.id);
-
-    if (servicesCount && servicesCount > 0 && hoursCount && hoursCount > 0) {
-      isFullyOnboarded = true;
-    }
-  }
+  let destination = business ? `${publicEnv.appUrl}/dashboard` : `${publicEnv.appUrl}/onboarding`;
 
   if (next?.startsWith("/")) {
-    return NextResponse.redirect(`${publicEnv.appUrl}${next}`);
+    destination = `${publicEnv.appUrl}${next}`;
   }
 
-  return NextResponse.redirect(
-    isFullyOnboarded ? `${publicEnv.appUrl}/dashboard` : `${publicEnv.appUrl}/onboarding`,
-  );
+  console.error('4. Redirecting to:', destination);
+  return NextResponse.redirect(destination);
 }
 
 export async function POST(request: NextRequest) {
