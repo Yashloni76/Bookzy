@@ -133,7 +133,7 @@ export function LoginForm() {
                 </h1>
                 <p className="mt-4 text-base leading-7 text-slate-600">
                   Enter your professional email address. We&apos;ll send a secure
-                  6-digit code, no password needed.
+                  sign-in code, no password needed.
                 </p>
               </div>
 
@@ -191,7 +191,7 @@ export function LoginForm() {
                   Enter your code
                 </h1>
                 <p className="mt-4 text-base leading-7 text-slate-600">
-                  We sent a 6-digit code to{" "}
+                  We sent a code to{" "}
                   <span className="font-semibold text-slate-900">{email}</span>.
                   Check your inbox and enter it below.
                 </p>
@@ -203,7 +203,7 @@ export function LoginForm() {
                     className="text-sm font-semibold text-slate-900"
                     htmlFor="otp-code"
                   >
-                    6-digit code
+                    Sign-in code
                   </label>
                   <div className="relative mt-2">
                     <KeyRound className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
@@ -213,12 +213,12 @@ export function LoginForm() {
                       className="h-14 w-full rounded-lg border border-slate-300 bg-white pl-12 pr-4 text-center text-2xl font-bold tracking-[0.4em] text-slate-950 outline-none transition placeholder:text-base placeholder:font-normal placeholder:tracking-normal focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
                       id="otp-code"
                       inputMode="numeric"
-                      maxLength={6}
+                      maxLength={8}
                       name="otp-code"
                       onChange={(event) =>
-                        setOtpCode(event.target.value.replace(/\D/g, "").slice(0, 6))
+                        setOtpCode(event.target.value.replace(/\D/g, "").slice(0, 8))
                       }
-                      placeholder="Enter code"
+                      placeholder="Enter the code from your email"
                       value={otpCode}
                     />
                   </div>
