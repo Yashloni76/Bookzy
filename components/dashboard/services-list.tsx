@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Edit2, Trash2, Power } from "lucide-react";
+import { Plus, Edit2, Power } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,8 +9,7 @@ import { Dialog, DialogHeader, DialogTitle, DialogDescription, DialogFooter } fr
 import { 
   addServiceAction, 
   updateServiceAction, 
-  toggleServiceStatusAction, 
-  deleteServiceAction 
+  toggleServiceStatusAction
 } from "@/app/(dashboard)/dashboard/services/actions";
 
 type Service = {
@@ -72,11 +71,7 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
     await toggleServiceStatusAction(id, !currentStatus);
   };
 
-  const deleteService = async (id: string) => {
-    if (confirm("Are you sure you want to delete this service?")) {
-      await deleteServiceAction(id);
-    }
-  };
+
 
   return (
     <div className="space-y-6">
@@ -142,13 +137,6 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
                           onClick={() => openEdit(service)}
                         >
                           <Edit2 className="h-4 w-4" />
-                        </Button>
-                        <Button 
-                          variant="ghost" 
-                          className="h-8 w-8 p-0 text-slate-400 hover:text-red-700"
-                          onClick={() => deleteService(service.id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
                     </td>

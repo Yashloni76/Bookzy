@@ -181,6 +181,12 @@ export async function POST(
       .single();
 
     if (bookingError) {
+      if (bookingError.code === "23P01") {
+        return NextResponse.json(
+          { error: "This slot was just booked by someone else. Please choose another time." },
+          { status: 409 }
+        );
+      }
       return NextResponse.json({ error: "Failed to create booking" }, { status: 500 });
     }
 

@@ -99,30 +99,3 @@ export async function toggleServiceStatusAction(serviceId: string, isActive: boo
   revalidatePath("/dashboard/services");
   return { success: true };
 }
-
-export async function deleteServiceAction(serviceId: string) {
-  const serverClient = createSupabaseServerClient();
-  const { data: { user } } = await serverClient.auth.getUser();
-
-  if (!user) return { error: "Unauthorized" };
-
-  const { data: business } = await serverClient
-    .from("businesses")
-    .select("id")
-    .eq("owner_id", user.id)
-    .single();
-
-  if (!business) return { error: "Business not found" };
-
-  const adminClient = createSupabaseAdminClient();
-  const { error } = await adminClient
-    .from("services")
-    .delete()
-    .eq("id", serviceId)
-    .eq("business_id", business.id);
-
-  if (error) return { error: error.message };
-
-  revalidatePath("/dashboard/services");
-  return { success: true };
-}
