@@ -10,10 +10,23 @@ export async function updateBusinessProfileAction(formData: FormData) {
 
   if (!user) return { error: "Unauthorized" };
 
-  const name = formData.get("businessName") as string;
-  const category = formData.get("category") as string;
-  const whatsapp = formData.get("whatsapp") as string;
-  const city = formData.get("city") as string;
+  const name = (formData.get("businessName") as string || "").trim();
+  const category = (formData.get("category") as string || "").trim();
+  const whatsapp = (formData.get("whatsapp") as string || "").trim();
+  const city = (formData.get("city") as string || "").trim();
+
+  if (name.length < 2 || name.length > 100) {
+    return { error: "Business name must be between 2 and 100 characters" };
+  }
+  if (!category) {
+    return { error: "Category is required" };
+  }
+  if (!/^[6-9]\d{9}$/.test(whatsapp)) {
+    return { error: "Invalid WhatsApp number" };
+  }
+  if (city.length < 2 || city.length > 50) {
+    return { error: "City must be between 2 and 50 characters" };
+  }
 
   const adminClient = createSupabaseAdminClient();
   const { error } = await adminClient
@@ -26,7 +39,10 @@ export async function updateBusinessProfileAction(formData: FormData) {
     })
     .eq("owner_id", user.id);
 
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("Failed to update business profile:", error);
+    return { error: "Failed to update profile, please try again." };
+  }
 
   revalidatePath("/dashboard/settings");
   revalidatePath("/dashboard"); // Might affect sidebar name
@@ -50,6 +66,14 @@ export async function updateWorkingHoursAction(businessId: string, hours: any[])
     return { error: "Unauthorized" };
   }
 
+  for (const h of hours) {
+    if (!h.is_closed && h.open_time && h.close_time) {
+      if (h.open_time >= h.close_time) {
+        return { error: "Open time must be before close time" };
+      }
+    }
+  }
+
   const adminClient = createSupabaseAdminClient();
   
   // Update each day (we do this in a loop or as upserts. Since they already exist, we update them)
@@ -62,7 +86,10 @@ export async function updateWorkingHoursAction(businessId: string, hours: any[])
     .delete()
     .eq("business_id", businessId);
 
-  if (deleteError) return { error: deleteError.message };
+  if (deleteError) {
+    console.error("Failed to delete existing hours:", deleteError);
+    return { error: "Failed to update working hours, please try again." };
+  }
 
   const payload = hours.map(h => ({
     business_id: businessId,
@@ -76,7 +103,10 @@ export async function updateWorkingHoursAction(businessId: string, hours: any[])
     .from("business_hours")
     .insert(payload);
 
-  if (insertError) return { error: insertError.message };
+  if (insertError) {
+    console.error("Failed to insert new hours:", insertError);
+    return { error: "Failed to update working hours, please try again." };
+  }
 
   revalidatePath("/dashboard/settings");
   return { success: true };

@@ -46,13 +46,22 @@ export async function PATCH(
     // Verify booking belongs to this business
     const { data: booking, error: fetchError } = await adminClient
       .from("bookings")
-      .select("id, customer_id, customer_email, customer_name, appointment_date, start_time, end_time, services(name)")
+      .select("id, status, customer_id, customer_email, customer_name, appointment_date, start_time, end_time, services(name)")
       .eq("id", params.id)
       .eq("business_id", business.id)
       .maybeSingle();
 
     if (fetchError || !booking) {
       return NextResponse.json({ error: "Booking not found" }, { status: 404 });
+    }
+
+    // Enforce valid state transitions
+    // Only allow confirmed -> completed | no_show | cancelled
+    if (booking.status !== "confirmed") {
+      return NextResponse.json(
+        { error: `Cannot change status from ${booking.status} to ${status}` },
+        { status: 400 }
+      );
     }
 
     // Update booking status
@@ -71,7 +80,7 @@ export async function PATCH(
     }
 
     // If no_show, increment customer's no_show_count
-    if (status === "no_show" && booking.customer_id) {
+    if (booking.status === "confirmed" && status === "no_show" && booking.customer_id) {
       const { data: customer } = await adminClient
         .from("customers")
         .select("no_show_count")

@@ -17,6 +17,11 @@ export async function GET(
       return NextResponse.json({ error: "Missing required params" }, { status: 400 });
     }
 
+    const today = new Date().toISOString().split("T")[0];
+    if (date < today) {
+      return NextResponse.json({ slots: [] });
+    }
+
     const adminClient = createSupabaseAdminClient();
 
     // Fetch business

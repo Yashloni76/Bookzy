@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { rangesOverlap } from "@/lib/availability/slots";
 
 export async function POST(request: Request) {
   try {
@@ -21,6 +22,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "End time must be after start time" }, { status: 400 });
     }
 
+    const today = new Date().toISOString().split("T")[0];
+    if (block_date < today) {
+      return NextResponse.json({ error: "Cannot block a date in the past" }, { status: 400 });
+    }
+
     const adminClient = createSupabaseAdminClient();
     
     // Verify business ownership
@@ -32,6 +38,30 @@ export async function POST(request: Request) {
 
     if (!business) {
       return NextResponse.json({ error: "Business not found" }, { status: 404 });
+    }
+
+    // Check for overlap with existing confirmed bookings
+    const { data: bookings } = await adminClient
+      .from("bookings")
+      .select("start_time, end_time")
+      .eq("business_id", business.id)
+      .eq("appointment_date", block_date)
+      .eq("status", "confirmed");
+
+    if (bookings) {
+      const hasOverlap = bookings.some(booking => 
+        rangesOverlap(
+          { start: start_time, end: end_time },
+          { start: booking.start_time, end: booking.end_time }
+        )
+      );
+
+      if (hasOverlap) {
+        return NextResponse.json(
+          { error: "This time range has an existing booking. Cancel or reschedule it first." },
+          { status: 409 }
+        );
+      }
     }
 
     const { data, error } = await adminClient
