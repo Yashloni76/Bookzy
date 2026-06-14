@@ -21,7 +21,7 @@ export default async function PublicBookingPage({ params }: BookingPageProps) {
 
   const { data: business } = await adminClient
     .from("businesses")
-    .select("id, business_name, category, city, description, is_active")
+    .select("id, business_name, category, city, description, is_active, whatsapp_number")
     .eq("slug", params.slug)
     .maybeSingle();
 
@@ -51,7 +51,12 @@ export default async function PublicBookingPage({ params }: BookingPageProps) {
       </div>
 
       <div className="w-full max-w-2xl mx-auto px-4 py-8">
-        <PublicBookingClient businessSlug={params.slug} services={services || []} />
+        <PublicBookingClient 
+          businessSlug={params.slug} 
+          services={services || []} 
+          businessName={business.business_name}
+          whatsappNumber={business.whatsapp_number}
+        />
       </div>
     </div>
   );

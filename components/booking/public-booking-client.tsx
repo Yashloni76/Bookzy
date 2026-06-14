@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CheckCircle2, Calendar as CalendarIcon, Clock, ArrowLeft } from "lucide-react";
+import { CheckCircle2, Calendar as CalendarIcon, Clock, ArrowLeft, MessageCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Service = {
   id: string;
@@ -18,10 +19,14 @@ type Service = {
 
 export function PublicBookingClient({ 
   businessSlug, 
-  services 
+  services,
+  businessName,
+  whatsappNumber
 }: { 
   businessSlug: string; 
   services: Service[]; 
+  businessName?: string;
+  whatsappNumber?: string | null;
 }) {
   const [step, setStep] = useState<"service" | "datetime" | "details" | "success">("service");
   
@@ -33,6 +38,7 @@ export function PublicBookingClient({
   const [isFetchingSlots, setIsFetchingSlots] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [bookingData, setBookingData] = useState<{ id: string, cancel_token: string } | null>(null);
   
   const router = useRouter();
 
@@ -109,6 +115,8 @@ export function PublicBookingClient({
         body: JSON.stringify(payload),
       });
       if (res.ok) {
+        const data = await res.json();
+        setBookingData({ id: data.booking_id, cancel_token: data.cancel_token });
         setStep("success");
       } else {
         const data = await res.json();
@@ -123,15 +131,46 @@ export function PublicBookingClient({
 
   if (step === "success") {
     return (
-      <Card className="text-center p-8 max-w-md mx-auto">
+      <Card className="text-center p-8 max-w-lg mx-auto">
         <div className="flex justify-center mb-4">
           <CheckCircle2 className="w-16 h-16 text-green-500" />
         </div>
         <h2 className="text-2xl font-bold mb-2">Booking Confirmed!</h2>
-        <p className="text-slate-500 mb-6">
-          Your appointment for {selectedService?.name} on {format(new Date(selectedDate), "MMMM d")} at {selectedTime ? formatTime(selectedTime) : ""} is confirmed.
+        <p className="text-slate-900 font-medium text-lg mb-2">
+          Your appointment is confirmed for {selectedService?.name} on {format(new Date(selectedDate), "MMMM d")} at {selectedTime ? formatTime(selectedTime) : ""}.
         </p>
-        <Button onClick={() => window.location.reload()} className="w-full">
+        
+        {whatsappNumber && (
+          <div className="bg-green-50 text-green-800 p-4 rounded-lg border border-green-100 my-6">
+            <p className="font-medium flex flex-col items-center gap-2">
+              Need to make changes? Contact {businessName} on WhatsApp:
+              <a 
+                href={`https://wa.me/${whatsappNumber.replace(/\D/g, '')}`} 
+                target="_blank" 
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+                {whatsappNumber}
+              </a>
+            </p>
+          </div>
+        )}
+
+        {bookingData && (
+          <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg my-6 text-sm text-amber-800 text-left">
+            <p className="font-semibold mb-1">Important: Keep this link to cancel or reschedule</p>
+            <p className="mb-3">Save this page or screenshot it - you&apos;ll need this link if you need to cancel your appointment.</p>
+            <Link 
+              href={`/booking/${bookingData.id}/cancel?token=${bookingData.cancel_token}`}
+              className="text-red-600 hover:text-red-700 font-medium underline underline-offset-4"
+            >
+              Cancel this booking
+            </Link>
+          </div>
+        )}
+
+        <Button onClick={() => window.location.reload()} className="w-full mt-2" variant="secondary">
           Book Another Appointment
         </Button>
       </Card>

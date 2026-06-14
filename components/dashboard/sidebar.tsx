@@ -93,10 +93,12 @@ export function Sidebar() {
         </nav>
 
         <div className="p-4 border-t border-slate-200 space-y-3">
-          <Button variant="secondary" className="w-full gap-2 justify-center">
-            <Share2 className="h-4 w-4" />
-            Share Link
-          </Button>
+          <Link href="/dashboard/share" className="w-full" onClick={() => setIsOpen(false)}>
+            <Button variant="secondary" className="w-full gap-2 justify-center">
+              <Share2 className="h-4 w-4" />
+              Share Link
+            </Button>
+          </Link>
           <Button 
             variant="ghost" 
             className="w-full gap-2 justify-center text-slate-500 hover:text-slate-900" 
