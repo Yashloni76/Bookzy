@@ -64,12 +64,12 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
   return (
     <div className="space-y-6">
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="bg-slate-100">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="today">Today</TabsTrigger>
-          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-          <TabsTrigger value="past">Past</TabsTrigger>
-          <TabsTrigger value="cancelled">Cancelled</TabsTrigger>
+        <TabsList className="bg-slate-100 flex w-full overflow-x-auto whitespace-nowrap scrollbar-hide justify-start md:justify-center p-1">
+          <TabsTrigger value="all" className="flex-shrink-0">All</TabsTrigger>
+          <TabsTrigger value="today" className="flex-shrink-0">Today</TabsTrigger>
+          <TabsTrigger value="upcoming" className="flex-shrink-0">Upcoming</TabsTrigger>
+          <TabsTrigger value="past" className="flex-shrink-0">Past</TabsTrigger>
+          <TabsTrigger value="cancelled" className="flex-shrink-0">Cancelled</TabsTrigger>
         </TabsList>
 
         <TabsContent value={activeTab} className="mt-6">
@@ -83,7 +83,7 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
             </Card>
           ) : (
             <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto hidden md:block">
                 <table className="w-full text-sm text-left">
                   <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
                     <tr>
@@ -143,6 +143,55 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
                     ))}
                   </tbody>
                 </table>
+              </div>
+              
+              {/* Mobile Cards View */}
+              <div className="md:hidden flex flex-col divide-y divide-slate-100">
+                {filteredBookings.map((booking) => (
+                  <div 
+                    key={booking.id} 
+                    className="p-4 flex flex-col gap-3 hover:bg-slate-50 transition-colors cursor-pointer"
+                    onClick={() => setSelectedBooking(booking)}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <div className="font-medium text-slate-900 text-base">{booking.customer_name}</div>
+                        <div className="text-slate-500 flex items-center mt-1 text-sm">
+                          <Phone className="w-3 h-3 mr-1" />
+                          {booking.customer_whatsapp}
+                        </div>
+                      </div>
+                      <div>
+                        {booking.status === "confirmed" && (
+                          <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 border-none">Confirmed</Badge>
+                        )}
+                        {booking.status === "completed" && (
+                          <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-100 border-none">Completed</Badge>
+                        )}
+                        {booking.status === "no_show" && (
+                          <Badge className="bg-red-100 text-red-700 hover:bg-red-100 border-none">No Show</Badge>
+                        )}
+                        {booking.status === "cancelled" && (
+                          <Badge className="bg-slate-100 text-slate-500 hover:bg-slate-100 line-through border-none">Cancelled</Badge>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="bg-slate-50 p-3 rounded-md text-sm border border-slate-100">
+                      <div className="text-slate-700 font-medium mb-1">{booking.services?.name}</div>
+                      <div className="text-slate-500 flex flex-wrap gap-x-3 gap-y-1">
+                        <div className="flex items-center">
+                          <CalendarClock className="w-3.5 h-3.5 mr-1" />
+                          {format(new Date(booking.appointment_date), "MMM d, yyyy")}
+                        </div>
+                        <div className="flex items-center">
+                          <Clock className="w-3.5 h-3.5 mr-1" />
+                          {formatTime(booking.start_time)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

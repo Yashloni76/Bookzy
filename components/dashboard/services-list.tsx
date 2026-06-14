@@ -97,66 +97,113 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
             No services found. Add one to get started!
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
-                <tr>
-                  <th className="px-6 py-4">Name</th>
-                  <th className="px-6 py-4">Duration</th>
-                  <th className="px-6 py-4">Price</th>
-                  <th className="px-6 py-4 text-center">Status</th>
-                  <th className="px-6 py-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {initialServices.map((service) => (
-                  <tr key={service.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-slate-900">
-                      {service.name}
-                    </td>
-                    <td className="px-6 py-4 text-slate-600">
-                      {service.duration_minutes} mins
-                    </td>
-                    <td className="px-6 py-4 text-slate-600">
-                      {service.price ? `₹${service.price}` : "Free / Varies"}
-                    </td>
-                    <td className="px-6 py-4 text-center">
-                      <span className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold ${
-                        service.is_active ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
-                      }`}>
-                        {service.is_active ? "Active" : "Inactive"}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Button 
-                          variant="ghost" 
-                          className="h-8 w-8 p-0 text-slate-400 hover:text-blue-700"
-                          onClick={() => toggleStatus(service.id, service.is_active)}
-                          title={service.is_active ? "Deactivate" : "Activate"}
-                          disabled={togglingId === service.id}
-                        >
-                          {togglingId === service.id ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                          ) : (
-                            <Power className="h-4 w-4" />
-                          )}
-                        </Button>
-                        <Button 
-                          variant="ghost" 
-                          className="h-8 w-8 p-0 text-slate-400 hover:text-blue-700"
-                          onClick={() => openEdit(service)}
-                          aria-label="Edit service"
-                        >
-                          <Edit2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </td>
+          <>
+            <div className="overflow-x-auto hidden md:block">
+              <table className="w-full text-left text-sm whitespace-nowrap">
+                <thead className="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                  <tr>
+                    <th className="px-6 py-4">Name</th>
+                    <th className="px-6 py-4">Duration</th>
+                    <th className="px-6 py-4">Price</th>
+                    <th className="px-6 py-4 text-center">Status</th>
+                    <th className="px-6 py-4 text-right">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {initialServices.map((service) => (
+                    <tr key={service.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4 font-medium text-slate-900">
+                        {service.name}
+                      </td>
+                      <td className="px-6 py-4 text-slate-600">
+                        {service.duration_minutes} mins
+                      </td>
+                      <td className="px-6 py-4 text-slate-600">
+                        {service.price ? `₹${service.price}` : "Free / Varies"}
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <span className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold ${
+                          service.is_active ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
+                        }`}>
+                          {service.is_active ? "Active" : "Inactive"}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          <Button 
+                            variant="ghost" 
+                            className="h-8 w-8 p-0 text-slate-400 hover:text-blue-700"
+                            onClick={() => toggleStatus(service.id, service.is_active)}
+                            title={service.is_active ? "Deactivate" : "Activate"}
+                            disabled={togglingId === service.id}
+                          >
+                            {togglingId === service.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Power className="h-4 w-4" />
+                            )}
+                          </Button>
+                          <Button 
+                            variant="ghost" 
+                            className="h-8 w-8 p-0 text-slate-400 hover:text-blue-700"
+                            onClick={() => openEdit(service)}
+                            aria-label="Edit service"
+                          >
+                            <Edit2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            
+            {/* Mobile Cards View */}
+            <div className="md:hidden flex flex-col divide-y divide-slate-100">
+              {initialServices.map((service) => (
+                <div key={service.id} className="p-4 flex flex-col gap-3 hover:bg-slate-50 transition-colors">
+                  <div className="flex justify-between items-start">
+                    <div className="font-medium text-slate-900 text-base">{service.name}</div>
+                    <span className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold shrink-0 ${
+                      service.is_active ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
+                    }`}>
+                      {service.is_active ? "Active" : "Inactive"}
+                    </span>
+                  </div>
+                  
+                  <div className="text-sm text-slate-600 flex justify-between items-center">
+                    <div>
+                      {service.duration_minutes} mins • {service.price ? `₹${service.price}` : "Free / Varies"}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Button 
+                        variant="ghost" 
+                        className="h-8 w-8 p-0 text-slate-400 hover:text-blue-700"
+                        onClick={() => toggleStatus(service.id, service.is_active)}
+                        title={service.is_active ? "Deactivate" : "Activate"}
+                        disabled={togglingId === service.id}
+                      >
+                        {togglingId === service.id ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Power className="h-4 w-4" />
+                        )}
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        className="h-8 w-8 p-0 text-slate-400 hover:text-blue-700"
+                        onClick={() => openEdit(service)}
+                        aria-label="Edit service"
+                      >
+                        <Edit2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
 

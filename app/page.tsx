@@ -13,6 +13,7 @@ import {
   Check
 } from "lucide-react";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
+import { MobileNav } from "@/components/marketing/mobile-nav";
 
 export default function LandingPage() {
   return (
@@ -36,10 +37,12 @@ export default function LandingPage() {
 
             <Link 
               href="/login" 
-              className="px-4 py-2 text-sm font-semibold text-white bg-blue-700 rounded-lg hover:bg-blue-800 transition-colors"
+              className="hidden md:inline-flex px-4 py-2 text-sm font-semibold text-white bg-blue-700 rounded-lg hover:bg-blue-800 transition-colors"
             >
               Add my business — it&apos;s free
             </Link>
+
+            <MobileNav />
           </div>
         </div>
       </nav>

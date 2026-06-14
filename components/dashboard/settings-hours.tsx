@@ -81,26 +81,31 @@ export function SettingsHours({ businessId, initialHours }: { businessId: string
           <div className="space-y-4">
             {hours.map((day, index) => (
               <div key={index} className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 border rounded-lg bg-white border-slate-200">
-                <div className="flex items-center gap-2 w-32 shrink-0">
-                  <input
-                    type="checkbox"
-                    checked={!day.is_closed}
-                    onChange={(e) => updateDay(index, { is_closed: !e.target.checked })}
-                    className="h-4 w-4 rounded border-slate-300 text-blue-700 focus:ring-blue-700"
-                  />
-                  <Label className={day.is_closed ? "text-slate-400" : "font-semibold"}>{DAYS[index]}</Label>
+                <div className="flex items-center gap-2 w-full sm:w-32 shrink-0 justify-between sm:justify-start">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={!day.is_closed}
+                      onChange={(e) => updateDay(index, { is_closed: !e.target.checked })}
+                      className="h-4 w-4 rounded border-slate-300 text-blue-700 focus:ring-blue-700"
+                    />
+                    <Label className={day.is_closed ? "text-slate-400" : "font-semibold"}>{DAYS[index]}</Label>
+                  </div>
+                  {day.is_closed && (
+                    <div className="text-sm text-slate-400 font-medium sm:hidden">Closed</div>
+                  )}
                 </div>
                 
                 {day.is_closed ? (
-                  <div className="text-sm text-slate-400 font-medium">Closed</div>
+                  <div className="hidden sm:block text-sm text-slate-400 font-medium">Closed</div>
                 ) : (
-                  <div className="flex items-center gap-3 flex-1">
+                  <div className="flex items-center gap-3 w-full sm:flex-1">
                     <Input
                       type="time"
                       value={day.open_time || "09:00"}
                       onChange={(e) => updateDay(index, { open_time: e.target.value })}
                       required={!day.is_closed}
-                      className="h-10"
+                      className="h-10 flex-1 sm:w-auto"
                     />
                     <span className="text-slate-400 text-sm font-medium">to</span>
                     <Input
@@ -108,7 +113,7 @@ export function SettingsHours({ businessId, initialHours }: { businessId: string
                       value={day.close_time || "18:00"}
                       onChange={(e) => updateDay(index, { close_time: e.target.value })}
                       required={!day.is_closed}
-                      className="h-10"
+                      className="h-10 flex-1 sm:w-auto"
                     />
                   </div>
                 )}
