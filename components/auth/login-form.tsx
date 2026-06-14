@@ -1,62 +1,102 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { ArrowRight, CalendarCheck, Loader2, Mail, ShieldCheck } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowRight, CalendarCheck, Loader2, Mail, ShieldCheck, KeyRound, RotateCcw } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
-import { publicEnv } from "@/lib/env";
 
-type FormStatus = "idle" | "loading" | "sent" | "error";
+type Step = "email" | "code";
 
 export function LoginForm() {
-  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<FormStatus>("idle");
-  const [message, setMessage] = useState("");
+  const [otpCode, setOtpCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const codeInputRef = useRef<HTMLInputElement>(null);
 
+  // Auto-focus code input when step changes to "code"
   useEffect(() => {
-    const errorParam = searchParams?.get("error");
-    if (errorParam) {
-      setStatus("error");
-      if (
-        errorParam === "pkce_code_verifier_not_found" ||
-        errorParam === "flow_state_not_found"
-      ) {
-        setMessage(
-          "Security error: Please open the login link on the exact same device and browser you used to request it."
-        );
-      } else {
-        setMessage("Login failed or link expired. Please try again.");
-      }
+    if (step === "code") {
+      // Small delay so DOM has rendered
+      setTimeout(() => codeInputRef.current?.focus(), 50);
     }
-  }, [searchParams]);
+  }, [step]);
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus("loading");
-    setMessage("");
+  // Resend cooldown countdown
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const timer = setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [resendCooldown]);
+
+  const sendOtp = useCallback(async () => {
+    setLoading(true);
+    setError("");
+    setSuccessMsg("");
 
     const supabase = createSupabaseBrowserClient();
-    const appUrl = publicEnv.appUrl.replace(/\/$/, "");
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error: otpError } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${appUrl}/auth/callback`,
         shouldCreateUser: true,
       },
     });
 
-    if (error) {
-      setStatus("error");
-      setMessage(error.message);
+    setLoading(false);
+
+    if (otpError) {
+      setError(otpError.message);
       return;
     }
 
-    setStatus("sent");
-    setMessage("Check your email for the BookZy login link.");
+    setStep("code");
+    setSuccessMsg(`Code sent to ${email}`);
+    setResendCooldown(30);
+  }, [email]);
+
+  async function handleSendCode(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await sendOtp();
   }
 
-  const isLoading = status === "loading";
+  async function handleVerifyCode(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const supabase = createSupabaseBrowserClient();
+    const { error: verifyError } = await supabase.auth.verifyOtp({
+      email,
+      token: otpCode,
+      type: "email",
+    });
+
+    if (verifyError) {
+      setLoading(false);
+      setError(verifyError.message);
+      return;
+    }
+
+    // Session is now set in the browser. Check where to redirect.
+    try {
+      const res = await fetch("/api/auth/check-business");
+      const { hasBusiness } = await res.json();
+      router.push(hasBusiness ? "/dashboard" : "/onboarding");
+    } catch {
+      // Fallback if the API call fails — session exists so onboarding is safe
+      router.push("/onboarding");
+    }
+  }
+
+  async function handleResend() {
+    setOtpCode("");
+    setError("");
+    await sendOtp();
+  }
 
   return (
     <main className="grid min-h-screen bg-white lg:grid-cols-2">
@@ -85,71 +125,158 @@ export function LoginForm() {
             </span>
           </div>
 
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight text-slate-950">
-              Sign in to manage your bookings
-            </h1>
-            <p className="mt-4 text-base leading-7 text-slate-600">
-              Enter your professional email address. We&apos;ll send a secure login
-              link, no password needed.
-            </p>
-          </div>
-
-          <form className="mt-10 space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label
-                className="text-sm font-semibold text-slate-900"
-                htmlFor="email"
-              >
-                Email address
-              </label>
-              <div className="relative mt-2">
-                <Mail className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                <input
-                  required
-                  className="h-14 w-full rounded-lg border border-slate-300 bg-white pl-12 pr-4 text-base text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
-                  id="email"
-                  name="email"
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="name@business.com"
-                  type="email"
-                  value={email}
-                />
+          {step === "email" ? (
+            <>
+              <div>
+                <h1 className="text-4xl font-bold tracking-tight text-slate-950">
+                  Sign in to manage your bookings
+                </h1>
+                <p className="mt-4 text-base leading-7 text-slate-600">
+                  Enter your professional email address. We&apos;ll send a secure
+                  6-digit code, no password needed.
+                </p>
               </div>
-            </div>
 
-            <div className="flex gap-4">
-              <button
-                className="flex flex-1 h-14 items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 text-base font-semibold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-70"
-                disabled={isLoading}
-                type="submit"
-              >
-                {isLoading ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                ) : (
-                  <>Send link <ArrowRight className="h-5 w-5" /></>
+              <form className="mt-10 space-y-6" onSubmit={handleSendCode}>
+                <div>
+                  <label
+                    className="text-sm font-semibold text-slate-900"
+                    htmlFor="email"
+                  >
+                    Email address
+                  </label>
+                  <div className="relative mt-2">
+                    <Mail className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+                    <input
+                      required
+                      className="h-14 w-full rounded-lg border border-slate-300 bg-white pl-12 pr-4 text-base text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
+                      id="email"
+                      name="email"
+                      onChange={(event) => setEmail(event.target.value)}
+                      placeholder="name@business.com"
+                      type="email"
+                      value={email}
+                    />
+                  </div>
+                </div>
+
+                <button
+                  className="flex h-14 w-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 text-base font-semibold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-70"
+                  disabled={loading}
+                  type="submit"
+                >
+                  {loading ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <>Send code <ArrowRight className="h-5 w-5" /></>
+                  )}
+                </button>
+
+                {error && (
+                  <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {error}
+                  </p>
                 )}
-              </button>
-              
-            </div>
 
-            {message ? (
-              <p
-                className={
-                  status === "error"
-                    ? "rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-                    : "rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700"
-                }
-              >
-                {message}
-              </p>
-            ) : null}
+                <div className="flex items-center justify-center gap-2 text-sm text-slate-600">
+                  <ShieldCheck className="h-4 w-4" />
+                  No password needed
+                </div>
+              </form>
+            </>
+          ) : (
+            <>
+              <div>
+                <h1 className="text-4xl font-bold tracking-tight text-slate-950">
+                  Enter your code
+                </h1>
+                <p className="mt-4 text-base leading-7 text-slate-600">
+                  We sent a 6-digit code to{" "}
+                  <span className="font-semibold text-slate-900">{email}</span>.
+                  Check your inbox and enter it below.
+                </p>
+              </div>
 
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-600">
-              <ShieldCheck className="h-4 w-4" />
-              No password needed
-            </div>
-          </form>
+              <form className="mt-10 space-y-6" onSubmit={handleVerifyCode}>
+                <div>
+                  <label
+                    className="text-sm font-semibold text-slate-900"
+                    htmlFor="otp-code"
+                  >
+                    6-digit code
+                  </label>
+                  <div className="relative mt-2">
+                    <KeyRound className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+                    <input
+                      required
+                      ref={codeInputRef}
+                      className="h-14 w-full rounded-lg border border-slate-300 bg-white pl-12 pr-4 text-center text-2xl font-bold tracking-[0.4em] text-slate-950 outline-none transition placeholder:text-base placeholder:font-normal placeholder:tracking-normal focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
+                      id="otp-code"
+                      inputMode="numeric"
+                      maxLength={6}
+                      name="otp-code"
+                      onChange={(event) =>
+                        setOtpCode(event.target.value.replace(/\D/g, "").slice(0, 6))
+                      }
+                      placeholder="Enter code"
+                      value={otpCode}
+                    />
+                  </div>
+                </div>
+
+                <button
+                  className="flex h-14 w-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 text-base font-semibold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-70"
+                  disabled={loading || otpCode.length < 6}
+                  type="submit"
+                >
+                  {loading ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <>Verify <ArrowRight className="h-5 w-5" /></>
+                  )}
+                </button>
+
+                {error && (
+                  <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {error}
+                  </p>
+                )}
+
+                {successMsg && !error && (
+                  <p className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+                    {successMsg}
+                  </p>
+                )}
+
+                <div className="flex items-center justify-between">
+                  <button
+                    className="flex items-center gap-1.5 text-sm font-medium text-blue-700 transition hover:text-blue-900 disabled:cursor-not-allowed disabled:text-slate-400"
+                    disabled={resendCooldown > 0 || loading}
+                    onClick={handleResend}
+                    type="button"
+                  >
+                    <RotateCcw className="h-3.5 w-3.5" />
+                    {resendCooldown > 0
+                      ? `Resend in ${resendCooldown}s`
+                      : "Resend code"}
+                  </button>
+
+                  <button
+                    className="text-sm font-medium text-slate-500 transition hover:text-slate-700"
+                    onClick={() => {
+                      setStep("email");
+                      setOtpCode("");
+                      setError("");
+                      setSuccessMsg("");
+                    }}
+                    type="button"
+                  >
+                    Use a different email
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </div>
       </section>
     </main>
