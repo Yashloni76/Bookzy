@@ -44,21 +44,21 @@ export function FaqAccordion() {
         return (
           <div 
             key={index} 
-            className="border border-slate-200 rounded-xl bg-white overflow-hidden transition-all duration-200"
+            className="border border-slate-200 dark:border-slate-800 rounded-xl bg-white dark:bg-slate-900 overflow-hidden transition-all duration-200"
           >
             <button
               onClick={() => toggle(index)}
-              className="w-full flex items-center justify-between p-5 text-left bg-white hover:bg-slate-50 transition-colors focus:outline-none"
+              className="w-full flex items-center justify-between p-5 text-left bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 dark:bg-slate-900/50 transition-colors focus:outline-none"
             >
-              <span className="font-semibold text-slate-900 pr-4">{faq.question}</span>
+              <span className="font-semibold text-slate-900 dark:text-slate-50 pr-4">{faq.question}</span>
               <ChevronDown 
-                className={`w-5 h-5 text-slate-500 transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
+                className={`w-5 h-5 text-slate-500 dark:text-slate-400 transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
               />
             </button>
             <div 
               className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
             >
-              <div className="p-5 pt-0 text-slate-600 leading-relaxed">
+              <div className="p-5 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed">
                 {faq.answer}
               </div>
             </div>

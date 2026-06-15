@@ -83,24 +83,24 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-950">Services</h1>
-          <p className="text-slate-500 mt-1">Manage what you offer to your clients.</p>
+          <h1 className="text-3xl font-bold text-slate-950 dark:text-slate-50">Services</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-1">Manage what you offer to your clients.</p>
         </div>
         <Button onClick={() => setIsAddOpen(true)} className="gap-2 shrink-0">
           <Plus className="h-4 w-4" /> Add Service
         </Button>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
         {initialServices.length === 0 ? (
-          <div className="p-12 text-center text-slate-500">
+          <div className="p-12 text-center text-slate-500 dark:text-slate-400">
             No services found. Add one to get started!
           </div>
         ) : (
           <>
             <div className="overflow-x-auto hidden md:block">
               <table className="w-full text-left text-sm whitespace-nowrap">
-                <thead className="bg-slate-50 text-slate-500 uppercase font-semibold border-b border-slate-200">
+                <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 uppercase font-semibold border-b border-slate-200 dark:border-slate-800">
                   <tr>
                     <th className="px-6 py-4">Name</th>
                     <th className="px-6 py-4">Duration</th>
@@ -109,21 +109,21 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
                     <th className="px-6 py-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {initialServices.map((service) => (
-                    <tr key={service.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-6 py-4 font-medium text-slate-900">
+                    <tr key={service.id} className="hover:bg-slate-50 dark:hover:bg-slate-800 dark:bg-slate-900/50 transition-colors">
+                      <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-50">
                         {service.name}
                       </td>
-                      <td className="px-6 py-4 text-slate-600">
+                      <td className="px-6 py-4 text-slate-600 dark:text-slate-400">
                         {service.duration_minutes} mins
                       </td>
-                      <td className="px-6 py-4 text-slate-600">
+                      <td className="px-6 py-4 text-slate-600 dark:text-slate-400">
                         {service.price ? `₹${service.price}` : "Free / Varies"}
                       </td>
                       <td className="px-6 py-4 text-center">
                         <span className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold ${
-                          service.is_active ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
+                          service.is_active ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600 dark:text-slate-400"
                         }`}>
                           {service.is_active ? "Active" : "Inactive"}
                         </span>
@@ -160,19 +160,19 @@ export function ServicesList({ initialServices }: { initialServices: Service[] }
             </div>
             
             {/* Mobile Cards View */}
-            <div className="md:hidden flex flex-col divide-y divide-slate-100">
+            <div className="md:hidden flex flex-col divide-y divide-slate-100 dark:divide-slate-800">
               {initialServices.map((service) => (
-                <div key={service.id} className="p-4 flex flex-col gap-3 hover:bg-slate-50 transition-colors">
+                <div key={service.id} className="p-4 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 dark:bg-slate-900/50 transition-colors">
                   <div className="flex justify-between items-start">
-                    <div className="font-medium text-slate-900 text-base">{service.name}</div>
+                    <div className="font-medium text-slate-900 dark:text-slate-50 text-base">{service.name}</div>
                     <span className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold shrink-0 ${
-                      service.is_active ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600"
+                      service.is_active ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600 dark:text-slate-400"
                     }`}>
                       {service.is_active ? "Active" : "Inactive"}
                     </span>
                   </div>
                   
-                  <div className="text-sm text-slate-600 flex justify-between items-center">
+                  <div className="text-sm text-slate-600 dark:text-slate-400 flex justify-between items-center">
                     <div>
                       {service.duration_minutes} mins • {service.price ? `₹${service.price}` : "Free / Varies"}
                     </div>

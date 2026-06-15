@@ -11,36 +11,36 @@ export function MobileNav() {
     <div className="md:hidden">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-slate-600 hover:text-slate-900 focus:outline-none"
+        className="p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-slate-50 focus:outline-none"
         aria-label="Toggle menu"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
       {isOpen && (
-        <div className="absolute top-20 left-0 right-0 bg-white border-b border-slate-200 shadow-lg p-4 flex flex-col gap-4 z-50 animate-in slide-in-from-top-2">
+        <div className="absolute top-20 left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-lg p-4 flex flex-col gap-4 z-50 animate-in slide-in-from-top-2">
           <a 
             href="#features" 
-            className="text-slate-600 font-medium hover:text-blue-700 px-4 py-2"
+            className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-700 px-4 py-2"
             onClick={() => setIsOpen(false)}
           >
             Features
           </a>
           <a 
             href="#how-it-works" 
-            className="text-slate-600 font-medium hover:text-blue-700 px-4 py-2"
+            className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-700 px-4 py-2"
             onClick={() => setIsOpen(false)}
           >
             How it works
           </a>
           <a 
             href="#pricing" 
-            className="text-slate-600 font-medium hover:text-blue-700 px-4 py-2"
+            className="text-slate-600 dark:text-slate-400 font-medium hover:text-blue-700 px-4 py-2"
             onClick={() => setIsOpen(false)}
           >
             Pricing
           </a>
-          <hr className="border-slate-100" />
+          <hr className="border-slate-100 dark:border-slate-800" />
           <Link 
             href="/login" 
             className="px-4 py-3 text-center text-sm font-semibold text-white bg-blue-700 rounded-lg hover:bg-blue-800 transition-colors"

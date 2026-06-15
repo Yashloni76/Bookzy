@@ -136,7 +136,7 @@ export function PublicBookingClient({
           <CheckCircle2 className="w-16 h-16 text-green-500" />
         </div>
         <h2 className="text-2xl font-bold mb-2">Booking Confirmed!</h2>
-        <p className="text-slate-900 font-medium text-lg mb-2">
+        <p className="text-slate-900 dark:text-slate-50 font-medium text-lg mb-2">
           Your appointment is confirmed for {selectedService?.name} on {format(new Date(selectedDate), "MMMM d")} at {selectedTime ? formatTime(selectedTime) : ""}.
         </p>
         
@@ -198,16 +198,16 @@ export function PublicBookingClient({
               <CardContent className="p-4 flex justify-between items-center">
                 <div>
                   <h3 className="font-medium text-lg">{service.name}</h3>
-                  <p className="text-slate-500 text-sm">{service.duration_minutes} minutes</p>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm">{service.duration_minutes} minutes</p>
                 </div>
                 {service.price && (
-                  <div className="font-semibold text-slate-900">₹{service.price}</div>
+                  <div className="font-semibold text-slate-900 dark:text-slate-50">₹{service.price}</div>
                 )}
               </CardContent>
             </Card>
           ))}
           {services.length === 0 && (
-            <p className="text-slate-500">No active services available.</p>
+            <p className="text-slate-500 dark:text-slate-400">No active services available.</p>
           )}
         </div>
       )}
@@ -232,9 +232,9 @@ export function PublicBookingClient({
                 <button
                   key={d.value}
                   onClick={() => handleDateChange(d.value)}
-                  className={`flex-shrink-0 px-4 py-2 rounded-lg border ${selectedDate === d.value ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-slate-200 hover:border-blue-300'}`}
+                  className={`flex-shrink-0 px-4 py-2 rounded-lg border ${selectedDate === d.value ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-blue-300'}`}
                 >
-                  <div className={`text-xs ${selectedDate === d.value ? 'text-blue-100' : 'text-slate-500'}`}>
+                  <div className={`text-xs ${selectedDate === d.value ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'}`}>
                     {d.label.split(',')[0]}
                   </div>
                   <div className="font-medium">
@@ -251,16 +251,16 @@ export function PublicBookingClient({
               Select Time
             </h3>
             {isFetchingSlots ? (
-              <div className="text-slate-500 py-4 text-center">Loading available slots...</div>
+              <div className="text-slate-500 dark:text-slate-400 py-4 text-center">Loading available slots...</div>
             ) : availableSlots.length === 0 ? (
-              <div className="text-slate-500 py-4 text-center border rounded-lg bg-slate-50">No slots available on this date.</div>
+              <div className="text-slate-500 dark:text-slate-400 py-4 text-center border rounded-lg bg-slate-50 dark:bg-slate-900/50">No slots available on this date.</div>
             ) : (
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                 {availableSlots.map((time) => (
                   <button
                     key={time}
                     onClick={() => setSelectedTime(time)}
-                    className={`py-2 px-3 rounded-lg border text-sm font-medium ${selectedTime === time ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-slate-200 hover:border-blue-300'}`}
+                    className={`py-2 px-3 rounded-lg border text-sm font-medium ${selectedTime === time ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-blue-300'}`}
                   >
                     {formatTime(time)}
                   </button>
@@ -281,9 +281,9 @@ export function PublicBookingClient({
 
       {step === "details" && (
         <div className="space-y-6">
-          <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
+          <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-lg border border-slate-100 dark:border-slate-800">
             <h3 className="font-medium text-lg mb-1">{selectedService?.name}</h3>
-            <p className="text-slate-600 flex items-center gap-2">
+            <p className="text-slate-600 dark:text-slate-400 flex items-center gap-2">
               <CalendarIcon className="w-4 h-4" /> {format(new Date(selectedDate), "MMMM d, yyyy")}
               <span className="mx-2">•</span>
               <Clock className="w-4 h-4" /> {selectedTime ? formatTime(selectedTime) : ""}
@@ -304,7 +304,7 @@ export function PublicBookingClient({
             <div className="space-y-2">
               <Label htmlFor="email">Email Address (Optional)</Label>
               <Input id="email" name="email" type="email" placeholder="john@example.com" />
-              <p className="text-xs text-slate-500">We&apos;ll send a confirmation email if provided.</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">We&apos;ll send a confirmation email if provided.</p>
             </div>
 
             <div className="space-y-2">

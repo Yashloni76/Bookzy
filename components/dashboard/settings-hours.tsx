@@ -80,7 +80,7 @@ export function SettingsHours({ businessId, initialHours }: { businessId: string
         <form onSubmit={handleSubmit} className="space-y-6 max-w-xl">
           <div className="space-y-4">
             {hours.map((day, index) => (
-              <div key={index} className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 border rounded-lg bg-white border-slate-200">
+              <div key={index} className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 border rounded-lg bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-2 w-full sm:w-32 shrink-0 justify-between sm:justify-start">
                   <div className="flex items-center gap-2">
                     <input

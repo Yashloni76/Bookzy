@@ -130,19 +130,19 @@ export function BlockSlotsManager({ initialBlockedSlots }: { initialBlockedSlots
         <CardContent>
           {deleteError && <p className="text-sm text-red-600 mb-4">{deleteError}</p>}
           {initialBlockedSlots.length === 0 ? (
-            <div className="flex flex-col items-center justify-center p-8 text-center text-slate-500">
+            <div className="flex flex-col items-center justify-center p-8 text-center text-slate-500 dark:text-slate-400">
               <CalendarX2 className="w-8 h-8 mb-2 text-slate-300" />
               <p>No blocked slots</p>
             </div>
           ) : (
             <div className="space-y-3">
               {initialBlockedSlots.map((block) => (
-                <div key={block.id} className="flex items-center justify-between p-3 border border-slate-100 rounded-lg bg-slate-50">
+                <div key={block.id} className="flex items-center justify-between p-3 border border-slate-100 dark:border-slate-800 rounded-lg bg-slate-50 dark:bg-slate-900/50">
                   <div>
-                    <div className="font-medium text-slate-900">
+                    <div className="font-medium text-slate-900 dark:text-slate-50">
                       {format(new Date(block.block_date), "MMM d, yyyy")}
                     </div>
-                    <div className="text-sm text-slate-500">
+                    <div className="text-sm text-slate-500 dark:text-slate-400">
                       {formatTime(block.start_time)} - {formatTime(block.end_time)}
                     </div>
                     {block.reason && <div className="text-xs text-slate-400 mt-1">{block.reason}</div>}

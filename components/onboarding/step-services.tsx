@@ -79,7 +79,7 @@ export function StepServices({
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-4">
             {services.map((service, index) => (
-              <div key={index} className="flex gap-4 items-end bg-white p-4 rounded-lg border border-slate-200">
+              <div key={index} className="flex gap-4 items-end bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
                 <div className="flex-1 space-y-2">
                   <Label>Service Name</Label>
                   <Input

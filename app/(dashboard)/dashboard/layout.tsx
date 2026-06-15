@@ -48,7 +48,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 lg:flex">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900/50 lg:flex">
       <Sidebar />
       <div className="flex-1 flex flex-col min-h-screen w-full">
         {/* Pass down business context if needed later, but standard layout wraps children */}

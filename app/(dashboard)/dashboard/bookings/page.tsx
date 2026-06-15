@@ -54,13 +54,13 @@ export default async function BookingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">All Bookings</h1>
-        <p className="text-slate-500 mt-1">Manage your schedule and appointments.</p>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50 tracking-tight">All Bookings</h1>
+        <p className="text-slate-500 dark:text-slate-400 mt-1">Manage your schedule and appointments.</p>
       </div>
 
       <BookingsList initialBookings={bookings || []} />
       
-      <div className="border-t border-slate-200 mt-12 pt-12">
+      <div className="border-t border-slate-200 dark:border-slate-800 mt-12 pt-12">
         <BlockSlotsManager initialBlockedSlots={blockedSlots || []} />
       </div>
     </div>

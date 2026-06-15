@@ -37,15 +37,15 @@ export default async function PublicBookingPage({ params }: BookingPageProps) {
     .order("name");
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center">
-      <div className="w-full bg-white shadow-sm border-b">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900/50 flex flex-col items-center">
+      <div className="w-full bg-white dark:bg-slate-900 shadow-sm border-b">
         <div className="max-w-2xl mx-auto px-4 py-8 md:py-12 text-center">
-          <div className="inline-block px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm font-medium mb-4">
+          <div className="inline-block px-3 py-1 bg-slate-100 text-slate-600 dark:text-slate-400 rounded-full text-sm font-medium mb-4">
             {business.category} {business.city ? `• ${business.city}` : ""}
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">{business.business_name}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-3">{business.business_name}</h1>
           {business.description && (
-            <p className="text-slate-500 max-w-lg mx-auto">{business.description}</p>
+            <p className="text-slate-500 dark:text-slate-400 max-w-lg mx-auto">{business.description}</p>
           )}
         </div>
       </div>

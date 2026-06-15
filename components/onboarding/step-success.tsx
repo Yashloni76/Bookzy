@@ -29,8 +29,8 @@ export function StepSuccess({ businessSlug }: { businessSlug: string }) {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
-        <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 flex items-center justify-between gap-4">
-          <span className="text-slate-900 font-medium truncate flex-1 text-left">
+        <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-lg border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
+          <span className="text-slate-900 dark:text-slate-50 font-medium truncate flex-1 text-left">
             {link}
           </span>
           <Button variant="secondary" onClick={copyToClipboard} className="shrink-0 gap-2 w-24">

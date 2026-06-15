@@ -28,13 +28,13 @@ export function OnboardingWizard({
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 items-center justify-center p-6">
+    <div className="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-900/50 items-center justify-center p-6">
       <div className="w-full max-w-2xl">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-950">
+          <h1 className="text-3xl font-bold text-slate-950 dark:text-slate-50">
             Set up your business
           </h1>
-          <p className="mt-2 text-slate-500">
+          <p className="mt-2 text-slate-500 dark:text-slate-400">
             Step {step} of 4
           </p>
           <div className="mt-4 flex h-2 w-full overflow-hidden rounded-full bg-slate-200">

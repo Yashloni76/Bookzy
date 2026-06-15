@@ -55,7 +55,7 @@ export function CancelBookingClient({ booking, token }: { booking: any, token: s
           <CheckCircle2 className="w-16 h-16 text-slate-300" />
         </div>
         <h2 className="text-2xl font-bold mb-2">Booking Cancelled</h2>
-        <p className="text-slate-500 mb-6">
+        <p className="text-slate-500 dark:text-slate-400 mb-6">
           Your appointment has been successfully cancelled.
         </p>
         {businessSlug && (
@@ -77,21 +77,21 @@ export function CancelBookingClient({ booking, token }: { booking: any, token: s
         </div>
       </div>
       <h2 className="text-xl font-bold text-center mb-2">Cancel Appointment?</h2>
-      <p className="text-slate-500 text-center mb-6">
+      <p className="text-slate-500 dark:text-slate-400 text-center mb-6">
         Are you sure you want to cancel your appointment with <strong>{businessName}</strong>?
       </p>
 
-      <div className="bg-slate-50 p-4 rounded-lg border border-slate-100 space-y-2 mb-8">
+      <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-lg border border-slate-100 dark:border-slate-800 space-y-2 mb-8">
         <div className="flex justify-between">
-          <span className="text-slate-500 text-sm">Service</span>
+          <span className="text-slate-500 dark:text-slate-400 text-sm">Service</span>
           <span className="font-medium text-sm">{serviceName}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-slate-500 text-sm">Date</span>
+          <span className="text-slate-500 dark:text-slate-400 text-sm">Date</span>
           <span className="font-medium text-sm">{format(new Date(booking.appointment_date), "MMMM d, yyyy")}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-slate-500 text-sm">Time</span>
+          <span className="text-slate-500 dark:text-slate-400 text-sm">Time</span>
           <span className="font-medium text-sm">{formatTime(booking.start_time)}</span>
         </div>
       </div>
@@ -112,7 +112,7 @@ export function CancelBookingClient({ booking, token }: { booking: any, token: s
         </Button>
         {businessSlug && (
           <Link href={`/${businessSlug}`} className="block">
-            <Button variant="ghost" className="w-full text-slate-500 h-11">
+            <Button variant="ghost" className="w-full text-slate-500 dark:text-slate-400 h-11">
               Keep Appointment
             </Button>
           </Link>
