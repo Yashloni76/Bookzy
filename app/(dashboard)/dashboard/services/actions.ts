@@ -10,7 +10,8 @@ export async function addServiceAction(formData: FormData) {
 
   if (!user) return { error: "Unauthorized" };
 
-  const { data: business } = await serverClient
+  const adminClient = createSupabaseAdminClient();
+  const { data: business } = await adminClient
     .from("businesses")
     .select("id")
     .eq("owner_id", user.id)
@@ -33,7 +34,6 @@ export async function addServiceAction(formData: FormData) {
     return { error: "Price cannot be negative" };
   }
 
-  const adminClient = createSupabaseAdminClient();
   const { error } = await adminClient.from("services").insert({
     business_id: business.id,
     name,
@@ -75,7 +75,8 @@ export async function updateServiceAction(serviceId: string, formData: FormData)
   // We should ideally verify the service belongs to the user's business,
   // but using admin client here to bypass RLS issues MVP style.
   // We can query the business id first to verify ownership.
-  const { data: business } = await serverClient
+  const adminClient = createSupabaseAdminClient();
+  const { data: business } = await adminClient
     .from("businesses")
     .select("id")
     .eq("owner_id", user.id)
@@ -83,7 +84,6 @@ export async function updateServiceAction(serviceId: string, formData: FormData)
 
   if (!business) return { error: "Business not found" };
 
-  const adminClient = createSupabaseAdminClient();
   const { error } = await adminClient
     .from("services")
     .update({ name, duration_minutes: duration, price })
@@ -105,7 +105,8 @@ export async function toggleServiceStatusAction(serviceId: string, isActive: boo
 
   if (!user) return { error: "Unauthorized" };
 
-  const { data: business } = await serverClient
+  const adminClient = createSupabaseAdminClient();
+  const { data: business } = await adminClient
     .from("businesses")
     .select("id")
     .eq("owner_id", user.id)
@@ -113,7 +114,6 @@ export async function toggleServiceStatusAction(serviceId: string, isActive: boo
 
   if (!business) return { error: "Business not found" };
 
-  const adminClient = createSupabaseAdminClient();
   const { error } = await adminClient
     .from("services")
     .update({ is_active: isActive })
