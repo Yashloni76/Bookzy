@@ -1,7 +1,7 @@
 -- 0002_prevent_double_booking.sql
 
 -- Enable btree_gist extension for exclusion constraints
-CREATE EXTENSION IF NOT EXISTS btree_gist;
+CREATE EXTENSION IF NOT EXISTS btree_gist SCHEMA extensions;
 
 -- Prevent two confirmed bookings for the same business & service on the same date from overlapping in time
 ALTER TABLE public.bookings ADD CONSTRAINT 
