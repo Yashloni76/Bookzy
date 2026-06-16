@@ -46,7 +46,7 @@ export function SettingsProfile({ business }: { business: any }) {
           </div>
           <div className="space-y-2">
             <Label>Booking URL Slug</Label>
-            <Input disabled defaultValue={`localhost:3000/${business.slug}`} className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400" />
+            <Input disabled defaultValue={`${(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(/^https?:\/\//, '')}/${business.slug}`} className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400" />
             <p className="text-xs text-slate-500 dark:text-slate-400">Contact support to change your booking URL.</p>
           </div>
           <div className="space-y-2">

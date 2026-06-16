@@ -10,8 +10,8 @@ import { Copy, CheckCircle2, MessageCircle, Share2, Hash, MapPin } from "lucide-
 export function ShareView({ businessName, slug }: { businessName: string, slug: string }) {
   const [copied, setCopied] = useState(false);
 
-  // Fallback to window.location.origin if NEXT_PUBLIC_APP_URL is somehow missing
-  const appUrl = typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000");
+  // Use NEXT_PUBLIC_APP_URL to ensure production URL is used for sharing and QR codes
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   const bookingUrl = `${appUrl}/${slug}`;
 
   const handleCopy = async () => {
