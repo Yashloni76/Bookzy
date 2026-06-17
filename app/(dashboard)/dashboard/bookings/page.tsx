@@ -51,6 +51,13 @@ export default async function BookingsPage() {
     .order("block_date", { ascending: true })
     .order("start_time", { ascending: true });
 
+  const { data: services } = await adminClient
+    .from("services")
+    .select("id, name, duration_minutes")
+    .eq("business_id", business.id)
+    .eq("is_active", true)
+    .order("name", { ascending: true });
+
   return (
     <div className="space-y-6">
       <div>
@@ -58,7 +65,7 @@ export default async function BookingsPage() {
         <p className="text-slate-500 dark:text-slate-400 mt-1">Manage your schedule and appointments.</p>
       </div>
 
-      <BookingsList initialBookings={bookings || []} />
+      <BookingsList initialBookings={bookings || []} services={services || []} />
       
       <div className="border-t border-slate-200 dark:border-slate-800 mt-12 pt-12">
         <BlockSlotsManager initialBlockedSlots={blockedSlots || []} />

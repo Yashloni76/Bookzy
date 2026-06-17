@@ -7,11 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarClock, Clock, User, Phone, CheckCircle2, UserX, XCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
+import { ManualBookingModal } from "./manual-booking-modal";
 import { useRouter } from "next/navigation";
 
-export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
+export function BookingsList({ initialBookings, services = [] }: { initialBookings: any[], services?: any[] }) {
   const [activeTab, setActiveTab] = useState("all");
   const [selectedBooking, setSelectedBooking] = useState<any | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -63,16 +66,23 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
 
   return (
     <div className="space-y-6">
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="bg-slate-100 flex w-full overflow-x-auto whitespace-nowrap scrollbar-hide justify-start md:justify-center p-1">
-          <TabsTrigger value="all" className="flex-shrink-0">All</TabsTrigger>
-          <TabsTrigger value="today" className="flex-shrink-0">Today</TabsTrigger>
-          <TabsTrigger value="upcoming" className="flex-shrink-0">Upcoming</TabsTrigger>
-          <TabsTrigger value="past" className="flex-shrink-0">Past</TabsTrigger>
-          <TabsTrigger value="cancelled" className="flex-shrink-0">Cancelled</TabsTrigger>
-        </TabsList>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full sm:w-auto">
+          <TabsList className="bg-slate-100 flex w-full overflow-x-auto whitespace-nowrap scrollbar-hide justify-start md:justify-center p-1">
+            <TabsTrigger value="all" className="flex-shrink-0">All</TabsTrigger>
+            <TabsTrigger value="today" className="flex-shrink-0">Today</TabsTrigger>
+            <TabsTrigger value="upcoming" className="flex-shrink-0">Upcoming</TabsTrigger>
+            <TabsTrigger value="past" className="flex-shrink-0">Past</TabsTrigger>
+            <TabsTrigger value="cancelled" className="flex-shrink-0">Cancelled</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <Button onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto shrink-0 flex items-center gap-2 bg-blue-600 hover:bg-blue-700">
+          <PlusCircle className="w-4 h-4" /> New Booking
+        </Button>
+      </div>
 
-        <TabsContent value={activeTab} className="mt-6">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsContent value={activeTab} className="mt-0">
           {filteredBookings.length === 0 ? (
             <Card className="flex flex-col items-center justify-center p-12 text-center border-dashed">
               <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900/50 text-slate-400 rounded-full flex items-center justify-center mb-4">
@@ -299,6 +309,8 @@ export function BookingsList({ initialBookings }: { initialBookings: any[] }) {
           </div>
         </div>
       )}
+
+      <ManualBookingModal open={isModalOpen} setOpen={setIsModalOpen} services={services} />
     </div>
   );
 }
