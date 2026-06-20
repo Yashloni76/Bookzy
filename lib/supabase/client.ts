@@ -17,7 +17,7 @@ export function createSupabaseBrowserClient() {
         },
         set(name: string, value: string, options) {
           if (typeof document === 'undefined') return
-          let cookie = `${name}=${value}; path=/; max-age=${options?.maxAge ?? 3600}; SameSite=Lax`
+          let cookie = `${name}=${value}; path=/; max-age=${options?.maxAge ?? 31536000}; SameSite=Lax`
           if (location.protocol === 'https:') cookie += '; Secure'
           document.cookie = cookie
         },
