@@ -10,7 +10,8 @@ import {
   Share2,
   Menu,
   X,
-  LogOut
+  LogOut,
+  BarChart3
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 const NAV_ITEMS = [
   { name: "Today's Schedule", href: "/dashboard", icon: CalendarCheck },
   { name: "All Bookings", href: "/dashboard/bookings", icon: CalendarDays },
+  { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
   { name: "Services", href: "/dashboard/services", icon: Scissors },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
