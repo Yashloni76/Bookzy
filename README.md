@@ -14,14 +14,6 @@ BookZy is a SaaS appointment booking platform built as a student project for Ind
 
 ---
 
-## 📸 Screenshots
-
-[Screenshot] - *(Dashboard showing Today's Schedule and Analytics)*
-
-[Screenshot] - *(Public Booking Page at /[slug] with Date/Time Picker)*
-
----
-
 ## ✨ Features
 
 ### 🏢 For Business Owners
